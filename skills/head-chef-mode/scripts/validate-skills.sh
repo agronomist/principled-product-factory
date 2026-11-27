@@ -50,4 +50,29 @@ for skill_md in "$SKILLS_DIR"/*/SKILL.md; do
 
 done
 
-echo "OK: Validated $SKILL_COUNT modular kitchen skills in $SKILLS_DIR (100% frontmatter & resource integrity)."
+AGENTS_DIR="$REPO_ROOT/agents"
+AGENT_COUNT=0
+if [ -d "$AGENTS_DIR" ]; then
+  for agent_md in "$AGENTS_DIR"/*.md; do
+    [ -e "$agent_md" ] || continue
+    AGENT_COUNT=$((AGENT_COUNT + 1))
+    base_name="$(basename "$agent_md" .md)"
+    first_line="$(head -n 1 "$agent_md")"
+    if [ "$first_line" != "---" ]; then
+      echo "ERROR: $agent_md is missing opening YAML frontmatter '---' on line 1. FIX: Add YAML frontmatter with name, description, and tools." >&2
+      exit 1
+    fi
+    frontmatter="$(awk 'NR==1 && /^---$/ {in_fm=1; next} in_fm && /^---$/ {exit} in_fm {print}' "$agent_md")"
+    fm_name="$(printf '%s\n' "$frontmatter" | awk -F': *' '/^name:/ {print $2; exit}' | tr -d '"'\''')"
+    if [ "$fm_name" != "$base_name" ]; then
+      echo "ERROR: $agent_md frontmatter name '$fm_name' does not match filename '$base_name'. FIX: Set 'name: $base_name' in $agent_md." >&2
+      exit 1
+    fi
+    if ! printf '%s\n' "$frontmatter" | grep -q '^tools:'; then
+      echo "ERROR: $agent_md is missing 'tools:' allowlist in frontmatter. FIX: Add a 'tools:' line to $agent_md." >&2
+      exit 1
+    fi
+  done
+fi
+
+echo "OK: Validated $SKILL_COUNT modular kitchen skills and $AGENT_COUNT Claude Code station subagents (100% frontmatter & resource integrity)."

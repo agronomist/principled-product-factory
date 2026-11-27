@@ -1,0 +1,13 @@
+{
+  "name": "principled-product-factory",
+  "owner": {
+    "name": "agronomist"
+  },
+  "plugins": [
+    {
+      "name": "kitchen-brigade",
+      "source": "./",
+      "description": "33-skill Kitchen Brigade (Brigade de Cuisine) software and revenue factory with 5 station subagents, 7 service playbooks, and pre-tool branch safety hooks."
+    }
+  ]
+}
