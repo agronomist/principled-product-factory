@@ -12,6 +12,9 @@ REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 mkdir -p "$(dirname "$OUT_FILE")"
 
+# Enforce Thomas Keller's "Clean As You Go" rule before calling Pass Inspector
+bash "$REPO_ROOT/skills/head-chef-mode/scripts/clean-station.sh" --dir "$REPO_ROOT"
+
 # Resolve diff target gracefully even on initial or clean trees
 if git rev-parse --verify "$BASE_REF" >/dev/null 2>&1; then
   DIFF_STAT="$(git diff --stat "$BASE_REF")"

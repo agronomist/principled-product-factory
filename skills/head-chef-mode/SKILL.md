@@ -16,6 +16,9 @@ file_names:
   - scripts/spawn-worktree.sh
   - scripts/cross-vendor-taste.sh
   - scripts/closing-duty.sh
+  - scripts/pre-shift-check.sh
+  - scripts/audit-date-dots.sh
+  - scripts/clean-station.sh
 ---
 
 # Head Chef Mode (`/head-chef-mode`)

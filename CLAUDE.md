@@ -1,32 +1,43 @@
 # CLAUDE.md — Operating Guide for the Kitchen Brigade Software Factory Skill Stack
 
-This repository is a **34-skill modular kitchen brigade stack** and **5-station native subagent suite** implementing an autonomous software and revenue factory. Capabilities are decomposed into composable skills under [`skills/`](file:///home/antigravity/principled-product-factory/skills/) (symlinked to `.claude/skills/`, `.agents/skills/`, and `.cursor/skills/`) and native station subagents under [`agents/`](file:///home/antigravity/principled-product-factory/agents/) (symlinked to `.claude/agents/`).
+This repository is a **39-skill modular kitchen brigade stack** and **5-station native subagent suite** implementing an autonomous software and revenue factory. Capabilities are decomposed into composable skills under [`skills/`](file:///home/antigravity/principled-product-factory/skills/) (symlinked to `.claude/skills/`, `.agents/skills/`, and `.cursor/skills/`) and native station subagents under [`agents/`](file:///home/antigravity/principled-product-factory/agents/) (symlinked to `.claude/agents/`).
 
 ---
 
-## 1. How to Run the Kitchen in Claude Code (The 7 Factory Levers)
+## 1. How to Run the Kitchen in Claude Code (The Factory Levers & Daily Chef Rituals)
 
-1. **Start Every Non-Trivial Order with [`/head-chef-mode`](file:///home/antigravity/principled-product-factory/skills/head-chef-mode/SKILL.md)**:
-   - `/head-chef-mode` classifies the Menu Stage (`Stage A: Test Kitchen 0-to-1`, `Stage B: Signature Menu & Growth`, or `Stage C: Multi-Kitchen Franchise Scale`), picks the matching service playbook from `skills/head-chef-mode/playbooks/*.md`, copies its steps into your todo list, and keeps the main context window clean (`principle-expediter-calls-not-cooks`).
-2. **Line Station Kickoff Rule**:
+1. **4:30 PM Pre-Shift Lineup & Walk-In Check ([`/pre-shift-lineup`](file:///home/antigravity/principled-product-factory/skills/pre-shift-lineup/SKILL.md))**:
+   - Before firing tickets in a new session, check base stockpot status, active `factory/*` cutting boards (`WIP <= 5`), spoiled `FIFO-DATE-DOT` containers, and station cleanliness:
+     ```bash
+     bash skills/head-chef-mode/scripts/pre-shift-check.sh
+     ```
+2. **Start Every Non-Trivial Order with [`/head-chef-mode`](file:///home/antigravity/principled-product-factory/skills/head-chef-mode/SKILL.md)**:
+   - `/head-chef-mode` classifies the Menu Stage (`Stage A: Test Kitchen 0-to-1`, `Stage B: Signature Menu & Growth`, or `Stage C: Multi-Kitchen Franchise Scale`), checks whether to serve a 5-minute [`/amuse-bouche`](file:///home/antigravity/principled-product-factory/skills/amuse-bouche/SKILL.md) first, picks the matching service playbook from `skills/head-chef-mode/playbooks/*.md`, and keeps the main context window clean (`principle-expediter-calls-not-cooks`).
+3. **Line Station Kickoff Rule**:
    - The first line of every subagent or station prompt MUST be:
      `Read <repo-root>/skills/head-chef-mode/station-brief.md before anything else.`
-3. **Spawn Isolated Cutting Boards with Little's Law WIP Guard (`WIP <= 5`)**:
-   - Before [`line-cook-implementer`](file:///home/antigravity/principled-product-factory/agents/line-cook-implementer.md) or [`/cook-off`](file:///home/antigravity/principled-product-factory/skills/cook-off/SKILL.md) touches code, provision a clean `factory/<ticket-slug>` git worktree:
+4. **Spawn Isolated Cutting Boards with Little's Law WIP Guard (`WIP <= 5`)**:
+   - Before [`line-cook-implementer`](file:///home/antigravity/principled-product-factory/agents/line-cook-implementer.md), [`/cook-off`](file:///home/antigravity/principled-product-factory/skills/cook-off/SKILL.md), or [`/stage-tryout`](file:///home/antigravity/principled-product-factory/skills/stage-tryout/SKILL.md) touches code, provision a clean `factory/<ticket-slug>` git worktree:
      ```bash
      bash skills/head-chef-mode/scripts/spawn-worktree.sh <ticket-slug>
      ```
-4. **Generate a Reasoning-Stripped Blind Tasting Packet**:
-   - Before invoking [`pass-inspector`](file:///home/antigravity/principled-product-factory/agents/pass-inspector.md) or an external cross-vendor model CLI, strip the Line Cook's internal reasoning and package only verbatim criteria + raw unified diff:
+5. **"Clean As You Go", Purple-Board Allergy Scan & FIFO Date Dots ([`/allergy-alert`](file:///home/antigravity/principled-product-factory/skills/allergy-alert/SKILL.md), [`/fifo-walk-in`](file:///home/antigravity/principled-product-factory/skills/fifo-walk-in/SKILL.md))**:
+   - Before calling [`pass-inspector`](file:///home/antigravity/principled-product-factory/agents/pass-inspector.md), wipe the station down, scan for allergens/secrets, and check `FIFO-DATE-DOT` expiration labels:
+     ```bash
+     bash skills/head-chef-mode/scripts/clean-station.sh --allergy
+     bash skills/head-chef-mode/scripts/audit-date-dots.sh
+     ```
+6. **Generate a Reasoning-Stripped Blind Tasting Packet**:
+   - Strip the Line Cook's internal reasoning and package only verbatim criteria + raw unified diff (automatically runs `clean-station.sh` first):
      ```bash
      bash skills/head-chef-mode/scripts/cross-vendor-taste.sh HEAD~1 "Verbatim criterion 1; Verbatim criterion 2"
      ```
-5. **Run the End-to-End Live Tasting Harness ([`/verify-kitchen-cookbook`](file:///home/antigravity/principled-product-factory/skills/verify-kitchen-cookbook/SKILL.md))**:
-   - Executes `Fire Up -> Station Check -> Plate -> Proof -> Dishpit` across every feature in [`features/README.md`](file:///home/antigravity/principled-product-factory/features/README.md) (including negative mutation detection, `PreToolUse` bouncer exit-code checks, and TSV formula-injection escaping) and writes `.audit/evidence/proof-kitchen-cookbook.json`:
+7. **Run the End-to-End Live Tasting Harness ([`/verify-kitchen-cookbook`](file:///home/antigravity/principled-product-factory/skills/verify-kitchen-cookbook/SKILL.md))**:
+   - Executes `Fire Up -> Station Check -> Plate -> Proof -> Dishpit` across every feature in [`features/README.md`](file:///home/antigravity/principled-product-factory/features/README.md) and writes `.audit/evidence/proof-kitchen-cookbook.json`:
      ```bash
      bash skills/head-chef-mode/scripts/run-live-tasting.sh
      ```
-6. **End-of-Shift Closing Duty (2-Minute Flywheel)**:
+8. **End-of-Shift Closing Duty (2-Minute Flywheel)**:
    - Run closing inspection at the end of every shift before `/update-the-cookbook` or `/sharpen-the-knives`:
      ```bash
      bash skills/head-chef-mode/scripts/closing-duty.sh

@@ -101,6 +101,32 @@ if ! grep -q "'=CMD" "$SCRATCH_TSV" || ! grep -q "'+malicious-hypothesis" "$SCRA
 fi
 echo "PASS: Prep Log appended TSV row and neutralized formula-injection prefixes."
 
+# Feature 4: Daily Chef Rituals (Pre-Shift Check, FIFO Date-Dots, Clean-As-You-Go + Allergy Scan)
+echo "-> Feature 4: Daily Chef Rituals (features/chef-rituals.md)"
+bash skills/head-chef-mode/scripts/pre-shift-check.sh
+
+# Negative check 4a: Verify audit-date-dots.sh fails on a spoiled container in scratch
+mkdir -p "$SCRATCH_DIR/spoiled-walkin"
+cat << 'EOF' > "$SCRATCH_DIR/spoiled-walkin/old_shim.py"
+# FIFO-DATE-DOT: expires=2020-01-01 owner=line-cook ticket=TKT-001 action=86-shim
+def legacy_shim():
+    return True
+EOF
+if bash skills/head-chef-mode/scripts/audit-date-dots.sh "$SCRATCH_DIR/spoiled-walkin" > /dev/null 2>&1; then
+  echo "FAIL: audit-date-dots.sh did not fail on an expired 2020-01-01 FIFO-DATE-DOT container!" >&2
+  exit 1
+fi
+echo "PASS: Walk-In FIFO scanner rejected spoiled container (expires=2020-01-01)."
+
+# Negative check 4b: Verify clean-station.sh fails on a dirty board with scratch droppings & debug crumbs
+mkdir -p "$SCRATCH_DIR/dirty-station"
+touch "$SCRATCH_DIR/dirty-station/leftover.bak"
+if bash skills/head-chef-mode/scripts/clean-station.sh --allergy --dir "$SCRATCH_DIR/dirty-station" > /dev/null 2>&1; then
+  echo "FAIL: clean-station.sh did not fail on a dirty cutting board with .bak droppings!" >&2
+  exit 1
+fi
+echo "PASS: Station Sanitizer rejected dirty cutting board with leftover .bak droppings."
+
 echo "================================================================"
 echo " [4/5] PROOF: Writing durable verification proof before Dishpit"
 echo "================================================================"
@@ -126,7 +152,10 @@ cat <<EOF > "$PROOF_FILE"
     "bouncer_block_git_push_main": $RC_PUSH,
     "bouncer_block_gh_pr_merge": $RC_MERGE,
     "bouncer_block_no_verify": $RC_NOVERIFY,
-    "prep_log_formula_injection_escaped": "PASS"
+    "prep_log_formula_injection_escaped": "PASS",
+    "pre_shift_walk_in_lineup": "PASS",
+    "fifo_date_dot_spoilage_rejected": "PASS",
+    "clean_station_dirty_board_rejected": "PASS"
   }
 }
 EOF

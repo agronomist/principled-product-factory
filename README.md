@@ -2,7 +2,7 @@
 
 Grab an apron. Wash your hands. Leave your "let's slap an AI chatbot on the sidebar and see what happens" ideas by the dumpster out back.
 
-**`principled-product-factory`** is a **34-skill modular cookbook** and **5-station subagent brigade** (`Brigade de Cuisine`) for **Claude Code**, **Cursor**, and **Antigravity**.
+**`principled-product-factory`** is a **39-skill modular cookbook** and **5-station subagent brigade** (`Brigade de Cuisine`) for **Claude Code**, **Cursor**, and **Antigravity**.
 
 We built this because AI coding agents have made writing code 10x faster—which mostly means teams can now cook **inedible dishes nobody ordered at 10x the speed**, burn through GPU token budgets like Kramer and Newman driving a mail truck full of 10-cent soda cans to Michigan, and call it "velocity."
 
@@ -123,18 +123,18 @@ Don't memorize 33 skill names. Just type **`/head-chef-mode`** and tell the kitc
 
 ---
 
-## 4. Meet the Brigade (All 5 Subagents & 34 Skills)
+## 4. Meet the Brigade (All 5 Subagents & 39 Skills)
 
 ### The 5 Native Claude Code Station Subagents (`agents/` $\to$ `.claude/agents/`)
 Each station runs in a fresh, stateless shift and only gets the exact kitchen tools it needs:
 
 | Station Subagent | Who They Are & What Tools They Hold |
 | :--- | :--- |
-| **[`host-triage`](agents/host-triage.md)** | **The Host at the Door (Classifier)**: Read-only (`Read, Grep, Glob`). Checks the reservation, tags the ticket, or stops the line with `needs_clarification` before anyone wastes prep time. |
+| **[`host-triage`](agents/host-triage.md)** | **The Host at the Door (Classifier)**: Read-only (`Read, Grep, Glob`). Checks the reservation, tags the ticket, flags `purple_board_allergy` & `amuse_bouche_candidate`, or stops the line with `needs_clarification`. |
 | **[`forager-researcher`](agents/forager-researcher.md)** | **The Forager (Researcher)**: Read + Web (`Read, Grep, Glob, WebSearch, WebFetch`). Heads out to the farmers' market when you need an upstream bug report or library changelog, and saves a pass-by-ID prep note. |
 | **[`sous-chef-planner`](agents/sous-chef-planner.md)** | **The Sous Chef (Analyst)**: Read-only (`Read, Grep, Glob`). Plans against a live checkout, sets up `/mise-en-place` containers, and writes the **verbatim plating criteria**. |
-| **[`line-cook-implementer`](agents/line-cook-implementer.md)** | **The Line Cook (Implementer)**: Full station tools (`Read, Edit, Write, Grep, Glob, Bash`). Cooks on an isolated `factory/<ticket-id>` branch, tastes the dish, and plates the commit. |
-| **[`pass-inspector`](agents/pass-inspector.md)** | **The Blind Pass Inspector (Reviewer)**: Read + test runner (`Read, Grep, Glob, Bash` — **`Edit` and `Write` are confiscated at the door**). Grades verbatim criteria on a different model vendor without hearing the Line Cook's excuses. |
+| **[`line-cook-implementer`](agents/line-cook-implementer.md)** | **The Line Cook (Implementer)**: Full station tools (`Read, Edit, Write, Grep, Glob, Bash`). Cooks on an isolated `factory/<ticket-id>` branch, tastes the dish, wipes the board, and plates the commit. |
+| **[`pass-inspector`](agents/pass-inspector.md)** | **The Blind Pass Inspector (Reviewer)**: Read + test runner (`Read, Grep, Glob, Bash` — **`Edit` and `Write` are confiscated at the door**). Runs `clean-station.sh` & `audit-date-dots.sh`, enforces `/allergy-alert` negative tests, and grades verbatim criteria blind. |
 
 ---
 
@@ -144,6 +144,15 @@ Each station runs in a fresh, stateless shift and only gets the exact kitchen to
 | **[`/head-chef-mode`](skills/head-chef-mode/SKILL.md)** | The Expediter at the pass. Matches your request to one of 7 service playbooks ([`ticket-to-pass`](skills/head-chef-mode/playbooks/ticket-to-pass.md), [`test-kitchen-tasting`](skills/head-chef-mode/playbooks/test-kitchen-tasting.md), [`recipe-reduction-loop`](skills/head-chef-mode/playbooks/recipe-reduction-loop.md), [`sommelier-table-pitch`](skills/head-chef-mode/playbooks/sommelier-table-pitch.md), [`first-tables-and-service-speed`](skills/head-chef-mode/playbooks/first-tables-and-service-speed.md), [`dining-room-harvest`](skills/head-chef-mode/playbooks/dining-room-harvest.md), [`off-menu-special`](skills/head-chef-mode/playbooks/off-menu-special.md)) and hands [`station-brief.md`](skills/head-chef-mode/station-brief.md) to every cook. |
 | **[`/setup-kitchen`](skills/setup-kitchen/SKILL.md)** | Interactive 1-minute setup for station models, token budgets, and live tasting harnesses. |
 | **[`/kitchen-help`](skills/kitchen-help/SKILL.md)** | Friendly maitre d' that routes you to the right skill, troubleshoots weird shifts, and hands you [`references/recipe-prompts.md`](skills/kitchen-help/references/recipe-prompts.md). |
+
+### Daily Chef Rituals: Lineup, Allergy Kit, Date Dots, *Stage* & Amuse-Bouche (5 Skills)
+| Skill | What It Does on the Line |
+| :--- | :--- |
+| **[`/pre-shift-lineup`](skills/pre-shift-lineup/SKILL.md)** | The 4:30 PM pre-shift walk-in check ([`pre-shift-check.sh`](skills/head-chef-mode/scripts/pre-shift-check.sh)): verifies the base stockpot (`main`) isn't already sour, checks active `factory/*` cutting boards (`WIP <= 5`), scans FIFO date dots, and inspects station cleanliness before service starts. |
+| **[`/allergy-alert`](skills/allergy-alert/SKILL.md)** | The **Purple Allergy Kit** for high-blast-radius tickets touching Auth, Multi-Tenant SQL Isolation, Billing, Secrets/Crypto, PII, or Destructive Migrations. Forces negative exploit criteria, `/health-inspector` proof, and [`clean-station.sh --allergy`](skills/head-chef-mode/scripts/clean-station.sh). |
+| **[`/fifo-walk-in`](skills/fifo-walk-in/SKILL.md)** | Green painter's tape & Sharpie Date Dots (`FIFO-DATE-DOT: expires=YYYY-MM-DD ticket=<id> action=86-or-graduate`) for temporary feature flags and shims, backed by [`audit-date-dots.sh`](skills/head-chef-mode/scripts/audit-date-dots.sh). |
+| **[`/stage-tryout`](skills/stage-tryout/SKILL.md)** | The one-shift ***Stage* (trail audition)**: test a new LLM model, library, or skill rewrite by replaying one solved historical ticket in an isolated worktree and scoring it head-to-head against your incumbent baseline before hiring it onto the main line. |
+| **[`/amuse-bouche`](skills/amuse-bouche/SKILL.md)** | **Serve the spoon before boiling the 40-gallon stockpot**: for Stage A 0-to-1 features, plate a working 5-minute single-bite interactive/CLI slice with fixture data so you can taste the workflow before spending 20,000 tokens on database migrations. |
 
 ### Menu Value, Food Cost, Brigade Line & Sommelier (8 Skills)
 | Skill | What It Does on the Line |
@@ -193,20 +202,29 @@ Each station runs in a fresh, stateless shift and only gets the exact kitchen to
 Instead of trusting an LLM to pinky-promise it read the rules, we ship executable shell levers in [`skills/head-chef-mode/scripts/`](skills/head-chef-mode/scripts/) and a Claude Code `PreToolUse` hook in [`.claude/settings.json`](.claude/settings.json) backed by [`hooks/pre-tool-guard.sh`](hooks/pre-tool-guard.sh):
 
 ```bash
-# 1. Run the 5-step Live Tasting Harness (Fire Up -> Station Check -> Plate -> Proof -> Dishpit)
+# 1. 4:30 PM Pre-Shift Lineup & Walk-In Cooler Check (/pre-shift-lineup)
+bash skills/head-chef-mode/scripts/pre-shift-check.sh
+
+# 2. Run the 5-step Live Tasting Harness (Fire Up -> Station Check -> Plate -> Proof -> Dishpit)
 #    Drives every feature in features/README.md and writes .audit/evidence/proof-kitchen-cookbook.json
 bash skills/head-chef-mode/scripts/run-live-tasting.sh
 
-# 2. Spawn an isolated git worktree cutting board (enforces Little's Law WIP <= 5)
+# 3. Spawn an isolated git worktree cutting board (enforces Little's Law WIP <= 5)
 bash skills/head-chef-mode/scripts/spawn-worktree.sh TKT-104-auth-boundary
 
-# 3. Strip the Line Cook's excuses & package a blind tasting bundle for pass-inspector
+# 4. "Clean As You Go" Station Sanitizer + Purple-Board Allergy Scan (/allergy-alert)
+bash skills/head-chef-mode/scripts/clean-station.sh --allergy
+
+# 5. Green Painter's Tape FIFO Date-Dot Spoilage Audit (/fifo-walk-in)
+bash skills/head-chef-mode/scripts/audit-date-dots.sh
+
+# 6. Strip the Line Cook's excuses & package a blind tasting bundle for pass-inspector
 bash skills/head-chef-mode/scripts/cross-vendor-taste.sh HEAD~1 "All tests pass; zero regressions"
 
-# 4. Log an atomic decision row to decisions.tsv (escapes spreadsheet formula injection)
+# 7. Log an atomic decision row to decisions.tsv (escapes spreadsheet formula injection)
 bash skills/head-chef-mode/scripts/log-decision.sh "line-cook" "added retry jitter" "prevent thundering herd" "tests/retry.sh:PASS" "kept commit"
 
-# 5. End-of-Shift Closing Duty (validates all 34 skills, 5 agents, feature map, and tasting proof)
+# 8. End-of-Shift Closing Duty (validates all 39 skills, 5 agents, feature map, and tasting proof)
 bash skills/head-chef-mode/scripts/closing-duty.sh
 ```
 
