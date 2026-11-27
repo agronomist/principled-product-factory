@@ -4,17 +4,24 @@ set -euo pipefail
 # Append-only TSV prep log (/prep-log)
 # Usage: scripts/log-decision.sh <logfile> <phase> <decision> <why> <evidence> <result>
 
-if [ "$#" -lt 6 ]; then
-  echo "Usage: $0 <logfile> <phase> <decision> <why> <evidence> <result>" >&2
+if [ "$#" -eq 5 ]; then
+  LOGFILE="${DECISIONS_TSV:-decisions.tsv}"
+  PHASE="$1"
+  DECISION="$2"
+  WHY="$3"
+  EVIDENCE="$4"
+  RESULT="$5"
+elif [ "$#" -ge 6 ]; then
+  LOGFILE="$1"
+  PHASE="$2"
+  DECISION="$3"
+  WHY="$4"
+  EVIDENCE="$5"
+  RESULT="$6"
+else
+  echo "Usage: $0 [<logfile>] <phase> <decision> <why> <evidence> <result>" >&2
   exit 1
 fi
-
-LOGFILE="$1"
-PHASE="$2"
-DECISION="$3"
-WHY="$4"
-EVIDENCE="$5"
-RESULT="$6"
 
 sanitize_cell() {
   local raw="$1"

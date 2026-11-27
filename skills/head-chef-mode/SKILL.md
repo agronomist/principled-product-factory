@@ -12,6 +12,10 @@ file_names:
   - playbooks/off-menu-special.md
   - scripts/log-decision.sh
   - scripts/validate-skills.sh
+  - scripts/run-live-tasting.sh
+  - scripts/spawn-worktree.sh
+  - scripts/cross-vendor-taste.sh
+  - scripts/closing-duty.sh
 ---
 
 # Head Chef Mode (`/head-chef-mode`)
