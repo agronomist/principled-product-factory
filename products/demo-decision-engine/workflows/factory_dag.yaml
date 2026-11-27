@@ -1,0 +1,52 @@
+workflow_id: "demo-decision-engine-v10"
+version: "10.0.0"
+lifecycle_stage: "Stage_B"
+wip_limit: 5
+
+margin_policy:
+  min_margin_usd: 0.05
+  min_margin_ratio: 0.65
+  default_unit_revenue_usd: 0.50
+
+sre_fallback_chain:
+  tiers:
+    - primary_frontier_model
+    - secondary_distilled_model
+    - tertiary_cached_deterministic
+  failure_threshold: 2
+  recovery_timeout_seconds: 30.0
+  shewhart_sigma_limit: 3.0
+
+routing_policy:
+  complexity_threshold: 0.65
+  risk_threshold: 0.60
+  min_margin_headroom_usd: 0.10
+  low_complexity_route: "fast_implement"
+  high_complexity_route: "parallel_fan_out"
+
+nodes:
+  - node_id: "validate_margin_gate"
+    description: "Pre-flight Contribution Margin Gate verification"
+    dependencies: []
+    skill_ref: "platform.metering.margin_guard"
+    compensating_action: "release_margin_reservation"
+    timeout_ms: 500
+    max_retries: 2
+
+  - node_id: "execute_decision_triage"
+    description: "Run Liskov-verified decision triage with 3-tier SRE fallback"
+    dependencies:
+      - "validate_margin_gate"
+    skill_ref: "products.demo_decision_engine.skills.decision_triage"
+    compensating_action: "revert_triage_state"
+    timeout_ms: 2500
+    max_retries: 2
+
+  - node_id: "emit_learning_signal"
+    description: "Record idempotent zero-friction learning tuple and 4-axis scorecard"
+    dependencies:
+      - "execute_decision_triage"
+    skill_ref: "platform.telemetry.learning_signal"
+    compensating_action: "void_learning_signal"
+    timeout_ms: 500
+    max_retries: 2

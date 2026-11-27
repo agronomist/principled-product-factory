@@ -1,0 +1,56 @@
+"""Multi-tier evaluation runner executing Tier A, Tier B (kappa >= 0.80), Tier C (CUPED & SRM),
+plus pstack-style adversarial interrogation (`/interrogate`), mutation proofs (`/create-formal-verification-skill`),
+and structural ratchets (`/correct`).
+"""
+
+from platform.evals.interrogator import (
+    AdversarialInterrogator,
+    AdversarialProbe,
+    FormalPropertyProofResult,
+    FormalPropertySpec,
+    InterrogationReport,
+    MutationProofVerifier,
+    StructuralRatchetLinter,
+    StructuralRatchetReport,
+    StructuralViolation,
+    VerifiedInterrogationFinding,
+)
+from platform.evals.runner import (
+    CUPEDResult,
+    EvalSuiteReport,
+    GoldenCase,
+    MultiTierEvalRunner,
+    SRMResult,
+    TierAResult,
+    TierBResult,
+    TierCResult,
+    compute_cohens_kappa,
+    compute_cuped_adjustment,
+    compute_srm_chi_square,
+    load_golden_cases_jsonl,
+)
+
+__all__ = [
+    "AdversarialInterrogator",
+    "AdversarialProbe",
+    "CUPEDResult",
+    "EvalSuiteReport",
+    "FormalPropertyProofResult",
+    "FormalPropertySpec",
+    "GoldenCase",
+    "InterrogationReport",
+    "MultiTierEvalRunner",
+    "MutationProofVerifier",
+    "SRMResult",
+    "StructuralRatchetLinter",
+    "StructuralRatchetReport",
+    "StructuralViolation",
+    "TierAResult",
+    "TierBResult",
+    "TierCResult",
+    "VerifiedInterrogationFinding",
+    "compute_cohens_kappa",
+    "compute_cuped_adjustment",
+    "compute_srm_chi_square",
+    "load_golden_cases_jsonl",
+]
