@@ -1,11 +1,11 @@
 {
   "name": "the-pass",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Five skills (shape, ship, review, verify, learn), two agents and a safety hook for going from idea to verified draft PR.",
   "author": {
     "name": "agronomist",
-    "url": "https://github.com/agronomist/principled-product-factory"
+    "url": "https://github.com/agronomist/the-pass"
   },
-  "repository": "https://github.com/agronomist/principled-product-factory",
+  "repository": "https://github.com/agronomist/the-pass",
   "license": "MIT"
 }
