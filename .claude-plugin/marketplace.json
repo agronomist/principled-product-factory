@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "kitchen-brigade",
+      "name": "principled-product-factory",
       "source": "./",
       "description": "Five skills (shape, ship, review, verify, learn), two agents and a safety hook for going from idea to verified draft PR."
     }
