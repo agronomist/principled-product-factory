@@ -52,7 +52,7 @@ protection in GitHub.
 | `skills/`, `agents/`, `hooks/` | What gets installed |
 | `tests/check.sh` | Layout, hook and install checks, also run in CI |
 | `evals/` | How to test whether this beats plain Claude Code |
-| `archive/` | The previous 42-skill version, not loaded |
+| `archive/` | The previous version, not loaded |
 
 ## Status
 
