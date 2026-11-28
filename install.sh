@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Installer for principled-product-factory
+# Installer for the-pass
 # Usage:
 #   ./install.sh                  # Install globally into ~/.claude/{skills,agents,hooks}, ~/.cursor/skills
 #   ./install.sh /path/to/project # Install into a specific project's .claude/ and .cursor/ folders

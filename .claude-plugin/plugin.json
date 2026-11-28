@@ -1,6 +1,6 @@
 {
-  "name": "principled-product-factory",
-  "version": "2.1.0",
+  "name": "the-pass",
+  "version": "3.0.0",
   "description": "Five skills (shape, ship, review, verify, learn), two agents and a safety hook for going from idea to verified draft PR.",
   "author": {
     "name": "agronomist",

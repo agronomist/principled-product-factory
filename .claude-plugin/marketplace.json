@@ -1,11 +1,11 @@
 {
-  "name": "principled-product-factory",
+  "name": "the-pass",
   "owner": {
     "name": "agronomist"
   },
   "plugins": [
     {
-      "name": "principled-product-factory",
+      "name": "the-pass",
       "source": "./",
       "description": "Five skills (shape, ship, review, verify, learn), two agents and a safety hook for going from idea to verified draft PR."
     }
