@@ -7,6 +7,7 @@ set -euo pipefail
 #      including git -C <dir> push, quoted branch names ("main"), or refspecs (HEAD:main).
 #   2. Autonomous PR merges via `gh pr merge` or `gh api .../pulls/.../merge`.
 #   3. Verification bypass flags (`--no-verify` or `git commit -n`) outside quoted message strings.
+#   4. File or git mutations when called by the read-only `reviewer` subagent.
 # Note: Real enforcement relies on GitHub branch protection rules; this hook prevents accidental agent tool calls.
 
 RAW_INPUT="${1:-}"
@@ -14,18 +15,26 @@ if [[ -z "$RAW_INPUT" ]] && [[ ! -t 0 ]]; then
   RAW_INPUT="$(cat)"
 fi
 
-# Extract command string from Claude Code PreToolUse JSON payload if JSON was provided
+# Extract command string and optional agent_type from Claude Code PreToolUse JSON payload
 COMMAND_STR="$RAW_INPUT"
+AGENT_TYPE="${THE_PASS_AGENT:-}"
 if command -v jq >/dev/null 2>&1 && printf '%s' "$RAW_INPUT" | grep -q '^[[:space:]]*{'; then
   EXTRACTED="$(printf '%s' "$RAW_INPUT" | jq -r '.tool_input.command // .command // empty' 2>/dev/null || true)"
   if [[ -n "$EXTRACTED" ]]; then
     COMMAND_STR="$EXTRACTED"
   fi
+  EXTRACTED_AGENT="$(printf '%s' "$RAW_INPUT" | jq -r '.agent_type // .subagent_type // .tool_input.agent_type // empty' 2>/dev/null || true)"
+  if [[ -n "$EXTRACTED_AGENT" ]]; then
+    AGENT_TYPE="$EXTRACTED_AGENT"
+  fi
 elif printf '%s' "$RAW_INPUT" | grep -q '"command"'; then
-  # Fallback JSON extraction if jq is unavailable
   EXTRACTED="$(printf '%s' "$RAW_INPUT" | sed -nE 's/.*"command"[[:space:]]*:[[:space:]]*"(([^"\\]|\\.)*)".*/\1/p' | sed 's/\\"/"/g; s/\\\\/\\/g')"
   if [[ -n "$EXTRACTED" ]]; then
     COMMAND_STR="$EXTRACTED"
+  fi
+  EXTRACTED_AGENT="$(printf '%s' "$RAW_INPUT" | sed -nE 's/.*"(sub)?agent_type"[[:space:]]*:[[:space:]]*"([^"]*)".*/\2/p')"
+  if [[ -n "$EXTRACTED_AGENT" ]]; then
+    AGENT_TYPE="$EXTRACTED_AGENT"
   fi
 fi
 
@@ -41,9 +50,16 @@ while IFS= read -r subcmd; do
   subcmd_trimmed="$(printf '%s' "$subcmd" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')"
   [[ -z "$subcmd_trimmed" ]] && continue
 
+  # 0. If the caller is the read-only `reviewer` subagent, block mutating git or file commands
+  if [[ "$AGENT_TYPE" == "reviewer" || "$AGENT_TYPE" == *":reviewer" ]]; then
+    if printf '%s\n' "$subcmd_trimmed" | grep -Eq '(^|[[:space:]])(git([[:space:]]+[^[:space:]]+)*[[:space:]]+(add|commit|push|reset|checkout|switch|restore|clean|rm|mv|apply|am|cherry-pick|rebase|merge|stash)|sed[[:space:]]+-i|perl[[:space:]]+-[a-zA-Z]*i|rm[[:space:]]|mv[[:space:]]|cp[[:space:]]|tee[[:space:]]|chmod[[:space:]]|chown[[:space:]])'; then
+      echo "BLOCKED by safety hook: Reviewer is read-only and cannot modify files or git state via Bash. FIX: Report the finding in your review verdict for the implementer to fix." >&2
+      exit 2
+    fi
+  fi
+
   # 1. Inspect any git push command (handling global git flags like `git -C . push`, `git --git-dir=... push`)
   if printf '%s\n' "$subcmd_trimmed" | grep -Eq '(^|[[:space:]])git([[:space:]]+(-[Ccp]|--git-dir|--work-tree|--namespace)([[:space:]]+[^[:space:]]+|=[^[:space:]]+)|[[:space:]]+--[^[:space:]]+)*[[:space:]]+push([[:space:]]|$)'; then
-    # Normalize quotes around arguments so `git push -f origin "main"` or `'main'` is caught
     push_unquoted="$(printf '%s' "$subcmd_trimmed" | tr -d '"'\''')"
 
     # 1a. Block explicit push to main, master, production, or release (including HEAD:main or refs/heads/main)
@@ -75,7 +91,6 @@ while IFS= read -r subcmd; do
     exit 2
   fi
   if printf '%s\n' "$subcmd_trimmed" | grep -Eq '(^|[[:space:]])git([[:space:]]+[^[:space:]]+)*[[:space:]]+commit([[:space:]]|$)'; then
-    # Strip quoted strings completely before checking for short `-n` flag on `git commit`
     commit_no_quotes="$(printf '%s' "$subcmd_trimmed" | sed -E 's/"([^"\\]|\\.)*"//g; s/'\''[^'\'']*'\''//g')"
     if printf '%s\n' "$commit_no_quotes" | grep -Eq '(^|[[:space:]])-[a-zA-Z]*n[a-zA-Z]*([[:space:]]|$)'; then
       echo "BLOCKED by safety hook: Bypassing commit hooks with 'git commit -n' is forbidden. FIX: Run 'git commit' without '-n' and fix any pre-commit failure." >&2

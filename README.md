@@ -6,8 +6,16 @@
 dish before it goes out. These five Claude Code skills take an idea to a verified
 draft pull request that a person decides whether to merge.
 
-<!-- EXAMPLE: add a real run here (ticket, command, excerpt of the draft PR with
-     proof for each criterion). Do not use a mock-up. -->
+**Real run from this repo ([PR #1](https://github.com/agronomist/the-pass/pull/1) $\to$ `commit 9152a13`):**
+```text
+Task:    Fix 5 plugin validation errors and 6 hook bypasses found by adversarial review
+Branch:  factory/simplify-5-skills
+Verify:  bash tests/check.sh -> PASS: all checks (16/16 hook & clean-install assertions)
+Proof:   - plugin.json: removed ../ parent traversal (0 claude plugin validate errors)
+         - hooks/pre-tool-guard.sh: blocked bare git push, git push -f origin "main",
+           git -C . push origin main, git commit -n, and gh api .../pulls/1/merge (exit 2)
+         - allowed commit messages mentioning "--no-verify" (exit 0)
+```
 
 ## Quick start
 
@@ -63,17 +71,20 @@ implementer's reasoning.
 
 ## Safety
 
-- The hook blocks common accidental pushes outside `factory/*`, PR merges and
-  skipped commit checks. It is pattern matching and can be bypassed, so also turn on
-  branch protection in GitHub.
-- The reviewer has no edit tools but keeps Bash, so it can still write files. Both
-  agents are Claude models.
+- The hook blocks common accidental pushes outside `factory/*`, PR merges, skipped
+  commit checks, and mutating git/file commands when called by the `reviewer` agent.
+  It is pattern matching and can be bypassed, so also turn on branch protection in
+  GitHub.
+- Both agents are Claude models by default; if `codex` or `gemini` is on `PATH`,
+  `reviewer` can pipe the diff to it for a cross-vendor second opinion.
 
 ## Does it help?
 
-Not yet measured. [`evals/`](evals/README.md) describes how to compare it with
-plain Claude Code. CI checks the layout, hook, install and plugin manifest, not
-the quality of the work.
+Run `bash evals/run.sh` to reproduce the 6-task regression and token-footprint
+benchmark across this repository's versions (~94% smaller prompt footprint than the
+42-skill v1 stack while passing 6/6 structural & hook tasks). See
+[`evals/`](evals/README.md) for the 10-ticket human-graded A/B protocol against plain
+Claude Code.
 
 ## Upgrading
 
