@@ -1,4 +1,7 @@
-# principled-product-factory
+# the-pass
+
+**Nothing leaves the kitchen untasted.** The pass is where a kitchen checks each
+dish before it goes out.
 
 Five Claude Code skills that take an idea to a verified draft pull request: decide
 what is worth building, build it, prove it works, and let a person merge it.
@@ -14,16 +17,16 @@ In Claude Code:
 
 ```text
 /plugin marketplace add agronomist/principled-product-factory
-/plugin install principled-product-factory@principled-product-factory
+/plugin install the-pass@the-pass
 ```
 
 Or clone the repo and run `./install.sh` (global) or `./install.sh /path/to/project`.
 The installer wires the safety hook only if the target has no `settings.json` yet,
 and warns otherwise.
 
-If you installed the plugin under its old name, `kitchen-brigade`, remove it first:
-`/plugin uninstall kitchen-brigade@principled-product-factory`, then update the
-marketplace and install as above.
+Upgrading from an earlier name (`kitchen-brigade` or `principled-product-factory`)?
+Remove the old marketplace, which also removes its plugins, then install as above:
+`/plugin marketplace remove principled-product-factory`
 
 ## Five skills
 
@@ -35,7 +38,7 @@ marketplace and install as above.
 | `verify` | Run the real thing and check numbers | `/verify the claimed 2x speedup` |
 | `learn` | Stop a mistake from repeating | `/learn we broke the same migration twice` |
 
-Plugin installs may show these as `/principled-product-factory:ship` and so on.
+Plugin installs may show these as `/the-pass:ship` and so on.
 
 ## Two agents
 
@@ -60,6 +63,6 @@ protection in GitHub.
 
 ## Status
 
-Version 2.1. Whether it improves results has not been measured yet; see
+Version 3.0. Whether it improves results has not been measured yet; see
 [`evals/`](evals/README.md). If you used version 1, its skills (including sales call
 harvesting) are in `archive/`, and the full runnable version is commit `8b0a141`.
