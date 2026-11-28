@@ -9,7 +9,7 @@ description: The One-Bite Proof of Flavor — before spending 20,000 tokens buil
 
 ## Why Chefs Serve an Amuse-Bouche Before the Banquet
 
-Even when a new feature idea passes [`/no-empty-calories`](../no-empty-calories/SKILL.md) (Ulwick Opportunity Score $\ge 10.0$) and [`/food-cost-guard`](../food-cost-guard/SKILL.md), the #1 waste of tokens in AI software factories is **cooking the entire banquet in the dark**: the agent disappears for 40 minutes, writes 1,400 lines of schema migrations, repository layers, and mocks—and the first time you actually run it, you realize the interaction feels clunky.
+Even when a new feature idea passes [`/no-empty-calories`](../no-empty-calories/SKILL.md) (JTBD Opportunity Score $\ge 10.0$) and [`/food-cost-guard`](../food-cost-guard/SKILL.md), the #1 waste of tokens in AI software factories is **cooking the entire banquet in the dark**: the agent disappears for 40 minutes, writes 1,400 lines of schema migrations, repository layers, and mocks—and the first time you actually run it, you realize the interaction feels clunky.
 
 `/amuse-bouche` enforces a strict rule for **`Stage A: Test Kitchen 0-to-1`** user-facing features: **Serve the spoon before you boil the 40-gallon stockpot.**
 

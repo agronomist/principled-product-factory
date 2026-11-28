@@ -5,7 +5,7 @@ description: Apply before firing AI model burners, designing workflow recipes, o
 
 # Principle: Food-Cost Margin Floor
 
-Never serve a dish or sign a table contract that loses money on every plate (*Kramer & Newman's Michigan bottle-deposit run*).
+Never serve a dish or sign a table contract that loses money on every plate (*the cross-state bottle-deposit mail truck*).
 
 - Enforce pre-flight unit economics on every plate:
   $$\texttt{unit\_revenue} - (\texttt{inference\_cost} + \texttt{data\_api\_cost} + \texttt{hitl\_prob} \cdot \texttt{human\_review\_cost} + \texttt{infra\_cost}) \ge \texttt{min\_margin}$$

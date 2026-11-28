@@ -5,7 +5,7 @@ description: Green painter's tape and FIFO (First-In, First-Out) Date-Dot hygien
 
 # Green Painter's Tape & FIFO Date Dots (`/fifo-walk-in`)
 
-> *"Open the walk-in cooler at any Michelin kitchen and every single cambro container has a strip of green painter's tape written in Sharpie: `Veal Stock — Prep: 11/24 — Use By: 11/27 — Chef Marco`. If the Sous Chef spots a container past its date dot—or an unlabeled mystery container—it goes straight into the trash."*
+> *"Open the walk-in cooler at any Michelin kitchen and every single cambro container has a strip of green painter's tape written in Sharpie: `Veal Stock — Prep: 11/24 — Use By: 11/27 — Sous Chef`. If the Sous Chef spots a container past its date dot—or an unlabeled mystery container—it goes straight into the trash."*
 
 ## 1. The Rule: No Unlabeled Mystery Containers in the Walk-In
 

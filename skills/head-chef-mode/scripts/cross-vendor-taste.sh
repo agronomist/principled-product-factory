@@ -16,7 +16,7 @@ OUT_FILE="${3:-.audit/evidence/blind-tasting-packet.md}"
 
 mkdir -p "$(dirname "$OUT_FILE")"
 
-# Enforce Thomas Keller's "Clean As You Go" rule before calling Pass Inspector
+# Enforce "Clean As You Go" rule before calling Pass Inspector
 bash "$SCRIPT_DIR/clean-station.sh" --dir "$WORK_REPO"
 
 # Resolve diff target gracefully even on initial or clean trees

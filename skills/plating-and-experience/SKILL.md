@@ -1,6 +1,6 @@
 ---
 name: plating-and-experience
-description: The Product Trio's Design & Dining-Experience Seat — eliminates Marty Cagan's Usability Risk and enforces "Plated != Eaten" outcome telemetry. Audits every user-facing feature, CLI, API, or UI on Time-to-First-Bite (<= 3 steps), Empty-Plate & Burned-Plate states (fix-naming errors), zero exposed kitchen plumbing, and mandatory outcome telemetry hooks. Use for /plating-and-experience, UX/DX review, or usability checks.
+description: The Product Trio's Design & Dining-Experience Seat — eliminates Usability Risk and enforces "Plated != Eaten" outcome telemetry. Audits every user-facing feature, CLI, API, or UI on Time-to-First-Bite (<= 3 steps), Empty-Plate & Burned-Plate states (fix-naming errors), zero exposed kitchen plumbing, and mandatory outcome telemetry hooks. Use for /plating-and-experience, UX/DX review, or usability checks.
 ---
 
 # Plating, Dining Experience & Outcome Telemetry (`/plating-and-experience`)
@@ -9,7 +9,7 @@ description: The Product Trio's Design & Dining-Experience Seat — eliminates M
 
 ## Why This Skill Exists (Giving Design a Seat in the Product Trio)
 
-In Marty Cagan's Product Operating Model, **Product Design / User Experience** is an equal partner alongside Product Management and the Tech Lead Engineer. Whether your dish is a web UI, a CLI tool, an API endpoint, or a Claude Code skill, **Usability Risk** (*"Can the diner figure out how to eat it without frustration?"*) and **Outcome Verification** (*"Did anyone actually eat it after we plated it?"*) must be checked on every user-facing ticket.
+In the Empowered Product Trio Operating Model, **Product Design / User Experience** is an equal partner alongside Product Management and the Tech Lead Engineer. Whether your dish is a web UI, a CLI tool, an API endpoint, or a Claude Code skill, **Usability Risk** (*"Can the diner figure out how to eat it without frustration?"*) and **Outcome Verification** (*"Did anyone actually eat it after we plated it?"*) must be checked on every user-facing ticket.
 
 ---
 
@@ -35,7 +35,7 @@ Every user-facing change planned by [`sous-chef-planner`](../../agents/sous-chef
   2. Whether the diner reached the target outcome or sent the plate back (`user_correction_diff`).
 - Without this telemetry hook, [`/dining-room-feedback`](../dining-room-feedback/SKILL.md) and the 30-day [`/fifo-walk-in`](../fifo-walk-in/SKILL.md) sunset gate are flying blind—so [`pass-inspector`](../../agents/pass-inspector.md) will return `request_changes` on any feature diff that lacks an outcome measurement hook.
 
-### 5. Billy Crystal's "The Schmeer" (Anticipate the Next 30 Seconds)
+### 5. "The Schmeer" (Anticipate the Next 30 Seconds)
 - Don't stop at the literal acceptance criterion if the user is left holding an awkward manual chore 10 seconds later.
 - Ask: *"Once the user sees this output, what is their immediate next click, copy-paste, or question?"*
 - Add the **Petit-Four Schmeer** ($\le 15\%$ extra code, zero new dependencies)—such as a ready-to-copy recovery command, a pre-computed delta summary, or a sensible default that saves them a round-trip.

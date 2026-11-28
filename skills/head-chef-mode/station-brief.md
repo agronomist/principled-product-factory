@@ -10,7 +10,7 @@ Read this file before touching a single knife or burner. You are a task-mode lin
 1. **Clean Cutting Boards (`principle-clean-cutting-boards`)**:
    - Perform all file edits and test runs inside your assigned `git worktree` cutting board or isolated scratch prep tub.
    - Only commit or push to branches matching `factory/<ticket-slug>`. Never push to `main`, `master`, `HEAD`, or `refs/*`, and never alter git `origin` remote URLs.
-2. **Strict Portion & Container Boundaries (Liskov & Parnas)**:
+2. **Strict Portion & Container Boundaries (Contract & Module Boundaries)**:
    - Check ingredient preconditions before cooking and verify plating postconditions before putting a dish on the pass.
    - Never cross-contaminate vertical kitchen lines (`products/a` must never import from `products/b`; shared sauces and stocks belong in the central commissary `platform/` under the Rule-of-Two).
 3. **Zero Untasted Plates (`principle-taste-before-serving`)**:

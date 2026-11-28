@@ -14,7 +14,7 @@ Identify the target diff (`git diff main...HEAD`) or recipe design. Restate the 
 Provision an isolated `git worktree` per adversarial inspector (across diverse model vendors) and hand each inspector this brief:
 
 > `Read <path>/station-brief.md before anything else.`
-> Try to break this change. Prove each health-code violation with a real run against the code—a failing test, a repro script, or command output showing spoiled output or a breached Liskov/food-cost/security invariant. Keep repros inside your own worktree. Report each violation with: (1) Title, (2) Exact command run, (3) Actual output printed, and (4) Output the recipe requires. Leave out anything you did not run (style, naming, theoretical future risks). "Zero violations" is a valid result.
+> Try to break this change. Prove each health-code violation with a real run against the code—a failing test, a repro script, or command output showing spoiled output or a breached contract/food-cost/security invariant. Keep repros inside your own worktree. Report each violation with: (1) Title, (2) Exact command run, (3) Actual output printed, and (4) Output the recipe requires. Leave out anything you did not run (style, naming, theoretical future risks). "Zero violations" is a valid result.
 
 ## 3. Re-Test & Filter (Execution-Only Survival Rule)
 For every violation reported by an inspector:

@@ -24,8 +24,8 @@ Answer the user's question about the Kitchen Brigade skill stack, hand them a co
 | Check unit economics, AI token/HITL costs, or 6-month re-pricing | [`/food-cost-guard`](../food-cost-guard/SKILL.md) |
 | Turn an issue/ticket into a blind-inspected Draft PR via 4 stations | [`/kitchen-brigade`](../kitchen-brigade/SKILL.md) |
 | Build a Challenger B2B sales pitch, push back on a discount, or cure buyer FOMU | [`/sommelier-table-pitch`](../sommelier-table-pitch/SKILL.md) |
-| Define April Dunford positioning and Hamilton Helmer 7 Powers moat | [`/signature-dish-moat`](../signature-dish-moat/SKILL.md) |
-| Sketch types, function signatures, and Liskov contracts before coding | [`/mise-en-place`](../mise-en-place/SKILL.md) |
+| Define 5-step menu positioning and 7 Structural Moats moat | [`/signature-dish-moat`](../signature-dish-moat/SKILL.md) |
+| Sketch types, function signatures, and contract pre/postconditions before coding | [`/mise-en-place`](../mise-en-place/SKILL.md) |
 | Run $N$ parallel line cooks on isolated worktrees and graft the best dish | [`/cook-off`](../cook-off/SKILL.md) |
 | Have adversarial inspectors try to break a diff with real repro commands | [`/health-inspector`](../health-inspector/SKILL.md) |
 | Prove a change doesn't spoil downstream callers outside the diff | [`/cross-contamination`](../cross-contamination/SKILL.md) |
@@ -39,7 +39,7 @@ Answer the user's question about the Kitchen Brigade skill stack, hand them a co
 | Set up 3-tier pantry fallbacks or turn an incident into a regression card | [`/pantry-backup-and-incident-card`](../pantry-backup-and-incident-card/SKILL.md) |
 | Catch up after an overnight shift and see every Draft PR waiting at the pass | [`/shift-handoff`](../shift-handoff/SKILL.md) |
 | Mine the transcript to upgrade `skills/*/SKILL.md` with durable lessons | [`/update-the-cookbook`](../update-the-cookbook/SKILL.md) |
-| Strip AI slop out of prose and apply Soccer / Seinfeld metaphors | [`/plain-english-menu`](../plain-english-menu/SKILL.md) |
+| Strip AI slop out of prose and apply Pitch / Kitchen metaphors | [`/plain-english-menu`](../plain-english-menu/SKILL.md) |
 
 ---
 
@@ -47,7 +47,7 @@ Answer the user's question about the Kitchen Brigade skill stack, hand them a co
 
 | Symptom | Cause & Fix |
 | :--- | :--- |
-| **A feature request was blocked before any code was written** | `/no-empty-calories` or `/food-cost-guard` caught a speculative Build-Trap idea (Ulwick score $< 10.0$ or negative unit margin). Supply real customer commitment evidence or distill model costs. |
+| **A feature request was blocked before any code was written** | `/no-empty-calories` or `/food-cost-guard` caught a speculative Build-Trap idea (Opportunity score $< 10.0$ or negative unit margin). Supply real customer commitment evidence or distill model costs. |
 | **The Brigade stopped after 2 refires (`MAX_REVISION_ROUNDS = 2`)** | The Pass Inspector requested changes twice and the Line Cook still missed a verbatim plating criterion. Inspect the unresolved findings or run `/principle-check-the-oven` to test the underlying premise. |
 | **A station retry halted immediately on attempt 2** | Duplicate SHA-256 burn signature detected (*George parallel parking the same bad angle twice*). The burner turned off automatically to save tokens. |
 | **A `git push` to `main` was blocked by a hook** | `hooks/pre-tool-guard.sh` and `principle-plate-at-the-pass` forbid direct pushes to `main`/`master`. Push to `factory/<ticket-slug>` and open a Draft PR. |

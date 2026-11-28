@@ -16,7 +16,7 @@ Never report a number until you can answer all seven checks with evidence:
 2. **What Is the Physical / Queueing Limiter?**
    - Name what physically bounds the number (network RTT, token generation TPS, SQLite WAL fsync, or Little's Law queueing delay under Kingman's formula $\frac{\rho}{1-\rho} \cdot \frac{c_a^2 + c_s^2}{2} \cdot \tau$). If your story contradicts the limiter, your measurement is wrong.
 3. **Is the Error / Spoilage Rate Zero?**
-   - A fast kitchen that serves raw chicken is not fast. Report the exact error rate and Liskov postcondition pass rate alongside any speed or cost number.
+   - A fast kitchen that serves raw chicken is not fast. Report the exact error rate and contract postcondition pass rate alongside any speed or cost number.
 4. **Is It Repeatable Across Runs?**
    - Report sample size $N$, median/mean, and variance or P99 tail—never a single cherry-picked hero run.
 5. **Are Baseline and Treatment on Equal Footing (Tuning Parity)?**

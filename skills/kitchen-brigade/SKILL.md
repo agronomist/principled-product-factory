@@ -1,11 +1,11 @@
 ---
 name: kitchen-brigade
-description: Escoffier Brigade de Cuisine 4-station software pipeline (Host Triage -> Sous Chef Planner -> Line Cook Implementer -> Blind Pass Inspector + Forager Researcher). Routes inbound tickets into plated draft pull requests using isolated git worktree cutting boards, pass-by-ID prep notes, anti-poisoning Master Recipe Book memory, and cross-vendor tasting.
+description: Brigade de Cuisine 4-station software pipeline (Host Triage -> Sous Chef Planner -> Line Cook Implementer -> Blind Pass Inspector + Forager Researcher). Routes inbound tickets into plated draft pull requests using isolated git worktree cutting boards, pass-by-ID prep notes, anti-poisoning Master Recipe Book memory, and cross-vendor tasting.
 ---
 
 # Kitchen Brigade 4-Station Pipeline (`/kitchen-brigade`)
 
-Organizes software delivery like Auguste Escoffier's **Brigade de Cuisine**: an Expediter calls the tickets and routes work across specialized, stateless line stations while keeping the Head Chef (human) on the final service bell (marking ready and merging).
+Organizes software delivery like the classic **Brigade de Cuisine**: an Expediter calls the tickets and routes work across specialized, stateless line stations while keeping the Head Chef (human) on the final service bell (marking ready and merging).
 
 ## 1. The Expediter Calls the Tickets, Never Cooks on the Line
 

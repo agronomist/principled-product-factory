@@ -10,7 +10,7 @@ Open a todo list with one entry per phase (`Frame`, `Fire stations`, `Blind tast
 ## Phase A: Frame the Recipe Contract
 Every contender gets the exact same order brief, so the brief is the contract.
 1. State the dish artifact each contender is producing.
-2. Derive the **tasting rubric** (3–6 concrete gradeable criteria including correctness, Liskov/Parnas container hygiene, and food-cost margin impact). Contenders only see the task brief; the rubric stays hidden with the taster.
+2. Derive the **tasting rubric** (3–6 concrete gradeable criteria including correctness, contract and module-boundary container hygiene, and food-cost margin impact). Contenders only see the task brief; the rubric stays hidden with the taster.
 3. Give each contender its own isolated cutting board (`git worktree` on `factory/cookoff-<slug>-cand-<n>` or `/tmp/cookoff-<slug>/candidate-<n>/`), per [`../principle-clean-cutting-boards/SKILL.md`](../principle-clean-cutting-boards/SKILL.md).
 
 ## Phase B: Fire All Stations in Parallel

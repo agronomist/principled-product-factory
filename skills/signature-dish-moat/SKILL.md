@@ -1,13 +1,13 @@
 ---
 name: signature-dish-moat
-description: Market positioning and structural moat design (April Dunford Obviously Awesome Positioning + Hamilton Helmer 7 Powers + Porter Five Forces). Use when defining why a dish wins against status-quo alternatives and how it builds a compounding kitchen moat.
+description: Market positioning and structural moat design (5-Step Menu Positioning + 7 Structural Moats + Supplier & Competitive Forces). Use when defining why a dish wins against status-quo alternatives and how it builds a compounding kitchen moat.
 ---
 
 # Signature Dish Positioning & Structural Moat (`/signature-dish-moat`)
 
 A great dish that diners confuse with fast food—or that a copycat restaurant across the street can clone tomorrow—earns zero long-term enterprise value.
 
-## 1. April Dunford's 5-Step Menu Positioning Canvas
+## 1. The 5-Step Menu Positioning Canvas
 
 Before writing marketing copy or sales decks, nail these five components in strict order:
 1. **True Competitive Alternatives**: What would the guest actually do if our kitchen didn't exist? (Usually a messy Excel spreadsheet, a manual ops team, or an unguarded prompt script—not another startup).
@@ -16,15 +16,15 @@ Before writing marketing copy or sales decks, nail these five components in stri
 4. **Best-Fit Diner Characteristics**: What traits make a customer care *a lot* about that value right now?
 5. **Menu Category**: Which market category frame makes our strengths immediately obvious?
 
-## 2. Hamilton Helmer's 7 Powers (Compounding Moat Check)
+## 2. The 7 Structural Moats (7 Powers) (Compounding Moat Check)
 
-Every Stage B/C product line must establish at least one of Helmer's **7 Powers** (a benefit + a barrier that prevents competitors from copying it):
+Every Stage B/C product line must establish at least one of the **7 Structural Moats** (a benefit + a barrier that prevents competitors from copying it):
 - **Process Power / Cornered Resource**: Proprietary domain distillation corpus built passively from `user_correction_diff` plate-backs ([`../dining-room-feedback/SKILL.md`](../dining-room-feedback/SKILL.md)).
 - **Switching Costs**: Deep workflow integration into the customer's daily audit trails (`decisions.tsv`) and financial margin guardrails.
 - **Counter-Positioning**: Refusing to charge per-seat vanity fees or push off-menu bloatware that legacy incumbents depend on.
 - **Scale / Network Economies**: Shared central-commissary primitives (`platform/`) that lower unit COGS across every new kitchen line stamped out.
 
-## 3. Porter's Five Forces — Defending Against Purveyor Power
+## 3. Supplier & Competitive Forces — Defending Against Purveyor Power
 
 Foundation model vendors are concentrated ingredient purveyors. Never give a single model vendor 100% pricing power over your gross margin:
 - Abstract every model dependency behind [`../pantry-backup-and-incident-card/SKILL.md`](../pantry-backup-and-incident-card/SKILL.md) (`primary_frontier_model -> secondary_distilled_model -> tertiary_cached_deterministic`).

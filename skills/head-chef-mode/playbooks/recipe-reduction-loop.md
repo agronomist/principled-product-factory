@@ -21,5 +21,5 @@ Use this playbook when reducing a sauce—optimizing a measurable target (accura
    - The moment **2 distinct tweaks fail the same tasting gate**, STOP proposing tweak #3.
    - Write down the single shared premise both failed tweaks assumed (e.g., *"is the oven pilot light even lit?"*), design a read-only observation probe to test that premise directly, run it, and log an `attack-premise` row to `decisions.tsv`.
 4. **Health Inspection & Prep-Log Audit (`health-inspector` + `prep-log`)**:
-   - Once the target reading is reached, run [`../../health-inspector/SKILL.md`](../../health-inspector/SKILL.md) to verify the optimization didn't game Goodhart's Law (*Kramer & Newman's Michigan bottle-deposit run*).
+   - Once the target reading is reached, run [`../../health-inspector/SKILL.md`](../../health-inspector/SKILL.md) to verify the optimization didn't game Goodhart's Law (*the cross-state bottle-deposit mail truck*).
    - Audit `decisions.tsv` against the transcript using a cross-vendor taster model and present the final `Attention` block.

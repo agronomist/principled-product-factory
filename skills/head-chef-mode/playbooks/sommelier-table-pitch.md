@@ -16,12 +16,12 @@ Use this playbook when structuring an enterprise B2B sales pitch, handling a VIP
 2. **Tailor the Pairing Across the Buying Table (`sommelier-table-pitch`)**:
    - Generate tailored briefs for all 4 seats at the table:
      - `ECONOMIC_BUYER_CFO` (monthly Cost-of-Delay waste, ROIC, CAC payback, food-cost margin floor).
-     - `TECHNICAL_ARCHITECT_VP_ENG` (3-tier pantry backup clean sheet, zero single-supplier lock-in, Liskov/Parnas boundaries).
+     - `TECHNICAL_ARCHITECT_VP_ENG` (3-tier pantry backup clean sheet, zero single-supplier lock-in, contract and module-boundary boundaries).
      - `MOBILIZER_CHAMPION` (*Go-Getters, Teachers, Skeptics*—never passive *Talkers*: 14-day Test Kitchen tasting producing a cross-vendor audited `decisions.tsv` trail).
      - `END_USER_OPERATOR` (Axis 1 Workflow Elimination $\ge 0.85$ with zero popup drudgery).
 3. **Hold Constructive Tension Against Off-Menu & Discount Demands (`no-empty-calories` + `food-cost-guard`)**:
    - **Never act like an order-taking waiter ("Relationship Builder")** who caves to off-menu demands or untraded discounts:
-     - If the guest demands a custom off-menu feature, run it through [`../../no-empty-calories/SKILL.md`](../../no-empty-calories/SKILL.md). If it is a single-table distraction ($N=1$) or fails Ulwick's Opportunity Score ($< 10.0$), **push back with Constructive Tension** and log the request in [`../../dining-room-feedback/SKILL.md`](../../dining-room-feedback/SKILL.md) (quarantined at $N=1$, automatically promoted to Test Kitchen tasting at $N=3$ independent tables).
+     - If the guest demands a custom off-menu feature, run it through [`../../no-empty-calories/SKILL.md`](../../no-empty-calories/SKILL.md). If it is a single-table distraction ($N=1$) or fails the JTBD Opportunity Score ($< 10.0$), **push back with Constructive Tension** and log the request in [`../../dining-room-feedback/SKILL.md`](../../dining-room-feedback/SKILL.md) (quarantined at $N=1$, automatically promoted to Test Kitchen tasting at $N=3$ independent tables).
      - If the guest requests a discount, verify [`../../food-cost-guard/SKILL.md`](../../food-cost-guard/SKILL.md) at the discounted price AND require a concrete **Give-Get concession** (24-month commitment, annual upfront payment, and public case study).
 4. **Apply the JOLT Effect Playbook to Cure Menu Paralysis (`sommelier-table-pitch`)**:
    - Diagnose **FOMU (Fear of Messing Up)** across Menu Overload, Endless Tasting-Sample Creep, and Outcome Fear:

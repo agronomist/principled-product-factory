@@ -32,7 +32,7 @@ This script inspects four stations in under 2 seconds:
 ## Step 2: Taste the Base Stock Before Firing New Orders
 
 If `pre-shift-check.sh` or the project's live tasting harness ([`/taste-the-dish`](../taste-the-dish/SKILL.md) / [`/verify-kitchen-cookbook`](../verify-kitchen-cookbook/SKILL.md)) shows that `main` is **already failing before your shift starts**:
-- **STOP THE LINE**: Never let a Line Cook start cooking a new feature on top of sour stock. Otherwise the cook will spend 40 minutes trying to debug a failure they didn't cause (George parallel-parking into a space that already has a abandoned car in it).
+- **STOP THE LINE**: Never let a Line Cook start cooking a new feature on top of sour stock. Otherwise the cook will spend 40 minutes trying to debug a failure they didn't cause (parallel-parking into a space that already has a abandoned car in it).
 - Either fix the broken baseline on `main` first, or explicitly document the pre-existing failure in the ticket brief so [`pass-inspector`](../../agents/pass-inspector.md) knows the exact baseline delta.
 
 ---

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Persistent Dining-Room & Gong Call Feedback Ledger (/dining-room-feedback)
+# Persistent Dining-Room & Sales Call Feedback Ledger (/dining-room-feedback)
 # Scrubs PII (emails/phones), neutralizes spreadsheet formula injection,
 # appends to dining-room-ledger.tsv, and prints the cross-session N=1->3->10 + ARR rollup
-# along with Billy Crystal's "The Schmeer" (the unspoken next step).
+# along with "The Schmeer" (the unspoken next step).
 #
 # Usage:
 #   bash .claude/skills/head-chef-mode/scripts/log-guest-feedback.sh \
@@ -82,7 +82,7 @@ else
 fi
 
 echo "================================================================"
-echo " DINING-ROOM & GONG LEDGER ROLLUP: $C_TOPIC"
+echo " DINING-ROOM & SALES-CALL LEDGER ROLLUP: $C_TOPIC"
 echo "   Distinct Accounts (N) : $DISTINCT_ACCOUNTS"
 echo "   Total ARR at Stake    : \$$TOTAL_ARR"
 echo "   Graduation Verdict    : $GRADUATION_STATUS"

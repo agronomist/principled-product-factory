@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Thomas Keller's "Clean As You Go" Station Sanitizer + Purple-Board Allergy Scanner
+# "Clean As You Go" Station Sanitizer + Purple-Board Allergy Scanner
 # Usage: bash skills/head-chef-mode/scripts/clean-station.sh [--allergy] [--full] [--dir <target-dir>]
 #
 # By default inside a Git worktree, inspects:

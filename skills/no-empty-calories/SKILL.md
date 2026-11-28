@@ -1,13 +1,13 @@
 ---
 name: no-empty-calories
-description: Anti-Build-Trap guest value gate and 30-day 86-the-dish sunset check. Use before putting any dish on the menu or accepting a feature request to prove real guest hunger (Ulwick JTBD Opportunity Score >= 10.0) and skin-in-the-game commitment (The Mom Test), and post-launch to 86 untouched dishes.
+description: Anti-Build-Trap guest value gate and 30-day 86-the-dish sunset check. Use before putting any dish on the menu or accepting a feature request to prove real guest hunger (JTBD Opportunity Score >= 10.0) and skin-in-the-game commitment (The Mom Test), and post-launch to 86 untouched dishes.
 ---
 
 # No Empty Calories (`/no-empty-calories`)
 
-A high-speed kitchen makes *cooking* 10x faster—which makes falling into **Melissa Perri's "Build Trap"** (measuring success by plates leaving the window rather than guests nourished) 10x more dangerous. We cook for the guest to satisfy an acute, underserved hunger—**never** *"just because someone at some point might order it."*
+A high-speed kitchen makes *cooking* 10x faster—which makes falling into **the "Build Trap"** (measuring success by plates leaving the window rather than guests nourished) 10x more dangerous. We cook for the guest to satisfy an acute, underserved hunger—**never** *"just because someone at some point might order it."*
 
-## 1. Frame the Guest Hunger (Ulwick JTBD Opportunity Score)
+## 1. Frame the Guest Hunger (JTBD Opportunity Score)
 
 Before writing a recipe or firing a burner for any feature, write down:
 - **Guest Segment**: Who specifically is hungry?
@@ -15,10 +15,10 @@ Before writing a recipe or firing a burner for any feature, write down:
 - **Desired Guest Outcome**: What measurable progress are they hiring our kitchen to deliver (never frame this as a UI garnish)?
 - **Importance ($I \in [1..10]$)** and **Current Satisfaction ($S \in [1..10]$)**.
 
-Compute **Tony Ulwick's Outcome-Driven Innovation (ODI) Opportunity Score**:
+Compute **Tony Opportunity Score's Outcome-Driven Innovation (ODI) Opportunity Score**:
 $$\text{OpportunityScore} = I + \max(I - S, 0)$$
 
-- **$\text{OpportunityScore} < 10.0$**: **86'd (`BLOCKED_OVERSERVED_JTBD`)**. Diners are already satisfied with their current meal (*Seinfeld metaphor: manufacturing Kramer's Coffee Table Book or The Urban Sombrero*).
+- **$\text{OpportunityScore} < 10.0$**: **86'd (`BLOCKED_OVERSERVED_JTBD`)**. Diners are already satisfied with their current meal (*Everyday metaphor: manufacturing a novelty dish nobody ordered or a novelty menu distraction*).
 - **$\text{OpportunityScore} \ge 10.0$** ($\ge 12.0$ for Stage B/C): Genuine underserved guest outcome.
 
 ## 2. Grade Skin-in-the-Game on *The Mom Test* Commitment Ladder

@@ -15,14 +15,14 @@ $$\text{ContributionMargin} = R_{\text{plate}} - \text{PlateCOGS} \ge M_{\min}$$
 
 - **If $\text{ContributionMargin} \ge M_{\min}$**: `APPROVED`.
 - **If $\text{ContributionMargin} < M_{\min}$ on `primary_frontier_model`**: Recompute using `secondary_distilled_model` ($0.20\times$ inference cost). If house-stock distillation restores $\text{ContributionMargin} \ge M_{\min}$, emit `DOWNGRADE_TO_DISTILLED` (*subbing off the expensive #10 playmaker for the #8 box-to-box midfielder*).
-- **If $\text{ContributionMargin} < M_{\min}$ even after distillation**: **86'd / BLOCKED** (*Kramer & Newman's Michigan bottle-deposit run: losing money on every plate served*).
+- **If $\text{ContributionMargin} < M_{\min}$ even after distillation**: **86'd / BLOCKED** (*the cross-state bottle-deposit mail truck: losing money on every plate served*).
 
 ## 2. The 4-Axis Recipe Filter (Blocking Molecular-Gastronomy AI Theater)
 
 Score every proposed AI capability from $0.0$ to $1.0$ across four axes:
 1. **Prep Elimination (`workflow_elimination`)**: Collapses multi-step human prep drudgery into an autonomous dish completion (not just adding another chat garnish the user has to babysit).
 2. **Dining-Room Flywheel (`flywheel_velocity`)**: Passively captures zero-friction `(input_state, system_output, user_correction_diff, verified_outcome)` tuples when plates come back to the pass—without nagging diners with table-tent surveys.
-3. **Deterministic Tasting (`deterministic_verifiability`)**: Output is verifiable via Liskov postconditions, container schemas, or calibrated Cohen's $\kappa \ge 0.80$ tasters.
+3. **Deterministic Tasting (`deterministic_verifiability`)**: Output is verifiable via contract postconditions, container schemas, or calibrated Cohen's $\kappa \ge 0.80$ tasters.
 4. **Food-Cost Resilience (`unit_margin_resilience`)**: Survives worst-case token expansion and human-in-the-loop (HITL) refire rates.
 
 **Hard Block Against Molecular-Gastronomy Foam Theater**:

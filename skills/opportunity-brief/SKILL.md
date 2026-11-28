@@ -1,6 +1,6 @@
 ---
 name: opportunity-brief
-description: Marty Cagan's Empowered Opportunity Assessment — turns mercenary feature requests ("Build feature X") into missionary problems to solve ("Move outcome metric Y for diner segment Z"). Strips off the prescribed solution, answers Cagan's 4 Opportunity Questions, and pitches 3 competing dish concepts (including a 10-line/zero-code option) before cooking. Use for /opportunity-brief, "unbundle this feature request", or outcome-driven roadmaps.
+description: Empowered Opportunity Assessment — turns mercenary feature requests ("Build feature X") into missionary problems to solve ("Move outcome metric Y for diner segment Z"). Strips off the prescribed solution, answers The Product Trio's 4 Opportunity Questions, and pitches 3 competing dish concepts (including a 10-line/zero-code option) before cooking. Use for /opportunity-brief, "unbundle this feature request", or outcome-driven roadmaps.
 ---
 
 # The Empowered Opportunity Brief (`/opportunity-brief`)
@@ -10,7 +10,7 @@ description: Marty Cagan's Empowered Opportunity Assessment — turns mercenary 
 ## 1. The Solution-to-Problem Reframe (Stop Cooking Prescribed Tickets Blindly)
 
 Stakeholders, users, and GitHub issues almost always ask for a **prescribed solution** (*"Add a custom webhook retry dashboard"*, *"Add a CSV export button"*).
-Before evaluating or building that specific solution, `/opportunity-brief` peels back the order using **Marty Cagan's 4 Opportunity Assessment Questions**:
+Before evaluating or building that specific solution, `/opportunity-brief` peels back the order using **The 4 Opportunity Assessment Questions**:
 
 1. **Objective (Which Restaurant Goal Does This Move?)**:
    - What specific business or product outcome is this supposed to improve (activation, retention, food-cost margin, service speed, expansion)?
@@ -38,7 +38,7 @@ Always fire **Option 1 or an [`/amuse-bouche`](../amuse-bouche/SKILL.md) of Opti
 
 ---
 
-## 3. Billy Crystal's "The Schmeer" (The Unspoken Next Step)
+## 3. "The Schmeer" (The Unspoken Next Step)
 
 > *"Giving the audience or diner what they asked for is just the bagel. The Schmeer is that unexpected extra riff—one step beyond what they knew to ask for—that makes them sit back and say: 'Wait... how did they know I was going to need that?!'"*
 
