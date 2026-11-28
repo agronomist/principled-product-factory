@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash hooks/pre-tool-guard.sh \"$CLAUDE_TOOL_INPUT\""
+            "command": "bash \"$CLAUDE_PROJECT_DIR/hooks/pre-tool-guard.sh\""
           }
         ]
       }

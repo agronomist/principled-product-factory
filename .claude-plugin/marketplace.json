@@ -7,7 +7,8 @@
     {
       "name": "kitchen-brigade",
       "source": "./",
-      "description": "42-skill Kitchen Brigade software & revenue factory for Claude Code & Cursor: 5 station subagents, Product Trio 4-Risk discovery, 'The Schmeer' next-step delighters, sales call harvesting, and blind-reviewed Draft PRs."
+      "description": "Five skills (shape, ship, review, verify, learn), two agents and a safety hook for going from idea to verified draft PR."
     }
-  ]
+  ],
+  "description": "Five skills (shape, ship, review, verify, learn), two agents and a safety hook for going from idea to verified draft PR."
 }

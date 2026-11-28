@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# One-Command Installer for the Kitchen Brigade Skill Stack (principled-product-factory)
+# Installer for principled-product-factory
 # Usage:
 #   ./install.sh                  # Install globally into ~/.claude/{skills,agents,hooks}, ~/.cursor/skills
 #   ./install.sh /path/to/project # Install into a specific project's .claude/ and .cursor/ folders
@@ -23,7 +23,7 @@ if [ "$TARGET_ABS" = "$REPO_ROOT" ]; then
   ln -sfn ../hooks "$REPO_ROOT/.claude/hooks"
   ln -sfn ../skills "$REPO_ROOT/.cursor/skills"
   ln -sfn ../skills "$REPO_ROOT/.agents/skills"
-  echo "Verified in-repo station symlinks for $SKILL_COUNT Kitchen Brigade skills, $AGENT_COUNT station subagents, and PreToolUse hooks."
+  echo "Verified in-repo links for $SKILL_COUNT skills, $AGENT_COUNT agents and the safety hook."
   exit 0
 fi
 
@@ -37,11 +37,18 @@ else
   CLAUDE_DIR="$TARGET_ABS/.claude"
   CURSOR_DIR="$TARGET_ABS/.cursor"
   AGENTS_DIR="$TARGET_ABS/.agents"
-  HOOK_CMD="bash .claude/hooks/pre-tool-guard.sh"
+  HOOK_CMD='bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/pre-tool-guard.sh\"'
   SCOPE_LABEL="project ($TARGET_ABS)"
 fi
 
 mkdir -p "$CLAUDE_DIR/skills" "$CLAUDE_DIR/agents" "$CLAUDE_DIR/hooks" "$CURSOR_DIR/skills" "$AGENTS_DIR/skills"
+
+# Remove links left by an earlier version of this repo whose targets no longer exist
+for link in "$CLAUDE_DIR"/skills/* "$CLAUDE_DIR"/agents/* "$CURSOR_DIR"/skills/* "$AGENTS_DIR"/skills/*; do
+  if [ -L "$link" ] && [ ! -e "$link" ]; then
+    case "$(readlink "$link")" in "$REPO_ROOT"/*) rm "$link" ;; esac
+  fi
+done
 
 for skill_dir in "$REPO_ROOT"/skills/*/; do
   skill_name="$(basename "$skill_dir")"
@@ -80,11 +87,10 @@ if [ ! -f "$CLAUDE_DIR/settings.json" ]; then
 EOF
 fi
 
-echo "Installed $SKILL_COUNT Kitchen Brigade skills, $AGENT_COUNT station subagents, and PreToolUse safety hook into $SCOPE_LABEL:"
-echo "  - Claude Code skills : $CLAUDE_DIR/skills/"
-echo "  - Claude Code agents : $CLAUDE_DIR/agents/"
-echo "  - Claude Code hooks  : $CLAUDE_DIR/hooks/pre-tool-guard.sh"
-echo "  - Cursor skills      : $CURSOR_DIR/skills/"
-echo "  - Agent skills       : $AGENTS_DIR/skills/"
-echo ""
-echo "Next step in Claude Code: type /setup-kitchen or /head-chef-mode"
+echo "Installed $SKILL_COUNT skills and $AGENT_COUNT agents into $SCOPE_LABEL."
+if grep -q 'pre-tool-guard' "$CLAUDE_DIR/settings.json"; then
+  echo "Safety hook is wired in $CLAUDE_DIR/settings.json"
+else
+  echo "WARNING: safety hook NOT wired: $CLAUDE_DIR/settings.json already exists. Add the PreToolUse hook yourself."
+fi
+echo "Next: run /ship with a task."
