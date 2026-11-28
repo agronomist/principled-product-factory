@@ -39,4 +39,4 @@ branch protection in GitHub.
 
 Not yet measured. See [`evals/`](evals/README.md).
 
-The previous 42-skill version is tag `v1-kitchen`.
+The previous 42-skill version is commit `8b0a141`.
