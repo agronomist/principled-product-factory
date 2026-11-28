@@ -7,7 +7,7 @@
     {
       "name": "kitchen-brigade",
       "source": "./",
-      "description": "Kitchen Brigade (Brigade de Cuisine) software and revenue factory with 5 station subagents, 7 service playbooks, modular skills, and PreToolUse branch safety hooks."
+      "description": "42-skill Kitchen Brigade software & revenue factory for Claude Code & Cursor: 5 station subagents, Marty Cagan Product Trio discovery, Billy Crystal's 'The Schmeer', Gong call harvesting, and blind-reviewed Draft PRs."
     }
   ]
 }
