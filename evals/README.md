@@ -1,4 +1,4 @@
-# Does the kitchen beat plain Claude Code?
+# Does this beat plain Claude Code?
 
 1. Pick 10 real, already-solved tickets. Write pass criteria before running anything.
 2. Run each from the same starting commit, same model, three ways: plain Claude Code,
