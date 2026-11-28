@@ -35,3 +35,17 @@ Once the underlying **Diner Problem + Leading Indicator** is written down, the P
 
 ### Decision Rule
 Always fire **Option 1 or an [`/amuse-bouche`](../amuse-bouche/SKILL.md) of Option 2** first unless there is measured evidence that the lighter dish cannot move the Key Result.
+
+---
+
+## 3. Billy Crystal's "The Schmeer" (The Unspoken Next Step)
+
+> *"Giving the audience or diner what they asked for is just the bagel. The Schmeer is that unexpected extra riff—one step beyond what they knew to ask for—that makes them sit back and say: 'Wait... how did they know I was going to need that?!'"*
+
+Defensive filters ([`/no-empty-calories`](../no-empty-calories/SKILL.md) and [`/food-cost-guard`](../food-cost-guard/SKILL.md)) protect the kitchen from cooking inedible waste, **but a kitchen that only ever cooks literal customer feature requests becomes a forgettable cafeteria.** Customers only ask for incremental patches to their current broken workflow.
+
+Once you nail the core problem (the bagel), every Opportunity Brief MUST propose **"The Schmeer"** subject to three strict rules so it never degenerates into scope creep:
+
+1. **Earn the Right First**: You cannot put a schmeer on a burned bagel. The core problem must be solved cleanly first.
+2. **The Next-30-Seconds Test**: Look at what the user has to do **30 seconds after** your feature finishes running. What is their very next manual copy-paste, terminal command, Excel formula, or awkward explanation to their boss? Eliminate *that* friction right on the plate (e.g., don't just display a failed webhook log—generate the exact pre-filled `curl` replay command and a 1-line root-cause summary right next to it).
+3. **Petit-Four Economics ($\le 15\%$ Effort, $10\times$ Hospitality)**: In a Michelin restaurant, sending out warm madeleines at the end of dinner costs 40 cents of butter and flour and creates $10\times$ the memory. A software Schmeer must cost **$\le 15\%$ of the ticket's build effort** and introduce **zero new infrastructure dependencies**.

@@ -135,6 +135,24 @@ if ! grep -q "'=CMD" "$SCRATCH_TSV" || ! grep -q "'+malicious-hypothesis" "$SCRA
 fi
 echo "PASS: Prep Log appended TSV row and neutralized formula-injection prefixes."
 
+# Test Gong & Dining-Room Ledger (PII Scrubbing + N=1->3 Graduation + ARR Rollup + The Schmeer)
+SCRATCH_LEDGER="$SCRATCH_DIR/dining-room-ledger.tsv"
+bash skills/head-chef-mode/scripts/log-guest-feedback.sh "$SCRATCH_LEDGER" "ACCT-01" "60000" "webhook-replay" "financial_or_pain_commitment" "CONFIRMED_IN_CODE" "Contact john@acmecorp.com or 415-555-0199 about failed webhooks" "Pre-filled curl replay command" > /dev/null
+bash skills/head-chef-mode/scripts/log-guest-feedback.sh "$SCRATCH_LEDGER" "ACCT-02" "50000" "webhook-replay" "time_commitment" "CONFIRMED_IN_CODE" "Second account hit webhook retry pain" "Pre-filled curl replay command" > /dev/null
+GONG_OUT="$(bash skills/head-chef-mode/scripts/log-guest-feedback.sh "$SCRATCH_LEDGER" "ACCT-03" "75000" "webhook-replay" "reputation_commitment" "CONFIRMED_IN_CODE" "Third account needs replay" "Pre-filled curl replay command")"
+
+if grep -q "john@acmecorp.com" "$SCRATCH_LEDGER" || ! grep -q "\[REDACTED_EMAIL\]" "$SCRATCH_LEDGER" || ! grep -q "\[REDACTED_PHONE\]" "$SCRATCH_LEDGER"; then
+  echo "FAIL: log-guest-feedback.sh did not scrub PII email/phone from Gong transcript quote!" >&2
+  cat "$SCRATCH_LEDGER" >&2
+  exit 1
+fi
+if ! printf '%s' "$GONG_OUT" | grep -q "PROMOTED_TO_STAGE_A_DISCOVERY_PROBE (N=3" || ! printf '%s' "$GONG_OUT" | grep -q "185000"; then
+  echo "FAIL: log-guest-feedback.sh did not compute N=3 graduation and \$185000 ARR rollup!" >&2
+  echo "$GONG_OUT" >&2
+  exit 1
+fi
+echo "PASS: Gong & Dining-Room Ledger scrubbed PII, tracked The Schmeer, and graduated N=3 accounts (\$185k ARR)."
+
 # Feature 4: Daily Chef Rituals + Clean External Project Install Test
 echo "-> Feature 4: Daily Chef Rituals & External Clean-Project Install (features/chef-rituals.md)"
 bash skills/head-chef-mode/scripts/pre-shift-check.sh

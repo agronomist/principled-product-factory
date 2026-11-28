@@ -34,3 +34,8 @@ Every user-facing change planned by [`sous-chef-planner`](../../agents/sous-chef
   1. When a diner invokes the feature, and
   2. Whether the diner reached the target outcome or sent the plate back (`user_correction_diff`).
 - Without this telemetry hook, [`/dining-room-feedback`](../dining-room-feedback/SKILL.md) and the 30-day [`/fifo-walk-in`](../fifo-walk-in/SKILL.md) sunset gate are flying blind—so [`pass-inspector`](../../agents/pass-inspector.md) will return `request_changes` on any feature diff that lacks an outcome measurement hook.
+
+### 5. Billy Crystal's "The Schmeer" (Anticipate the Next 30 Seconds)
+- Don't stop at the literal acceptance criterion if the user is left holding an awkward manual chore 10 seconds later.
+- Ask: *"Once the user sees this output, what is their immediate next click, copy-paste, or question?"*
+- Add the **Petit-Four Schmeer** ($\le 15\%$ extra code, zero new dependencies)—such as a ready-to-copy recovery command, a pre-computed delta summary, or a sensible default that saves them a round-trip.
