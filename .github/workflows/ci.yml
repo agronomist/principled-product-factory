@@ -1,21 +1,13 @@
-name: Kitchen Brigade CI
-
+name: CI
 on:
   push:
     branches: [ main, "factory/**" ]
   pull_request:
     branches: [ main ]
-
 jobs:
-  live-tasting-harness:
-    name: Validate Plugin Manifests, Hooks, Clean Install & 42 Skills
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run 5-Step Live Tasting Harness (Fire Up -> Station Check -> Plate -> Proof -> Dishpit)
-        run: bash skills/head-chef-mode/scripts/run-live-tasting.sh
-
-      - name: Run End-of-Shift Closing Duty Check
-        run: bash skills/head-chef-mode/scripts/closing-duty.sh
+      - uses: actions/checkout@v4
+      - run: bash tests/check.sh
+      - run: npx -y @anthropic-ai/claude-code plugin validate .

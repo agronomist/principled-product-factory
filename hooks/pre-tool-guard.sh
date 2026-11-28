@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Claude Code PreToolUse Guard Hook (principle-plate-at-the-pass)
+# Claude Code PreToolUse Guard Hook
 # Blocks:
 #   1. Direct or bare git push to protected branches (main, master, production, release),
 #      including git -C <dir> push, quoted branch names ("main"), or refspecs (HEAD:main).
@@ -48,37 +48,37 @@ while IFS= read -r subcmd; do
 
     # 1a. Block explicit push to main, master, production, or release (including HEAD:main or refs/heads/main)
     if printf '%s\n' "$push_unquoted" | grep -Eq '([[:space:]:/])(main|master|production|release)([[:space:]]|$)'; then
-      echo "BLOCKED by Kitchen Brigade Hook (principle-plate-at-the-pass): Direct pushes to main/master/production/release are forbidden. FIX: Push to an isolated 'factory/<ticket-slug>' branch (and enable GitHub branch protection as the server-side lock)." >&2
+      echo "BLOCKED by safety hook: Direct pushes to main/master/production/release are forbidden. FIX: Push to an isolated 'factory/<ticket-slug>' branch (and enable GitHub branch protection as the server-side lock)." >&2
       exit 2
     fi
 
     # 1b. Block bare `git push` or `git push [-u|--force] [origin]` that omits an explicit `factory/*` branch target
     if ! printf '%s\n' "$push_unquoted" | grep -Eq '([[:space:]:/])factory/[A-Za-z0-9._-]+'; then
-      echo "BLOCKED by Kitchen Brigade Hook (principle-plate-at-the-pass): Bare or non-factory git push detected. FIX: Specify an explicit 'factory/<ticket-slug>' branch (e.g., 'git push -u origin factory/<ticket-slug>')." >&2
+      echo "BLOCKED by safety hook: Bare or non-factory git push detected. FIX: Specify an explicit 'factory/<ticket-slug>' branch (e.g., 'git push -u origin factory/<ticket-slug>')." >&2
       exit 2
     fi
   fi
 
   # 2. Block PR merges via `gh pr merge` OR `gh api .../pulls/.../merge` / GraphQL mergePullRequest
   if printf '%s\n' "$subcmd_trimmed" | grep -Eq '(^|[[:space:]])gh[[:space:]]+pr[[:space:]]+merge([[:space:]]|$)'; then
-    echo "BLOCKED by Kitchen Brigade Hook (principle-plate-at-the-pass): Merging pull requests is not in the agent tool surface. FIX: Leave the Draft PR at the pass for the Head Chef to merge." >&2
+    echo "BLOCKED by safety hook: Merging pull requests is not in the agent tool surface. FIX: Leave the draft PR for a person to merge." >&2
     exit 2
   fi
   if printf '%s\n' "$subcmd_trimmed" | grep -Eq '(^|[[:space:]])gh[[:space:]]+api[[:space:]].*(/pulls/[0-9]+/merge|mergePullRequest)'; then
-    echo "BLOCKED by Kitchen Brigade Hook (principle-plate-at-the-pass): Merging pull requests via 'gh api' is forbidden. FIX: Leave the Draft PR at the pass for the Head Chef to merge." >&2
+    echo "BLOCKED by safety hook: Merging pull requests via 'gh api' is forbidden. FIX: Leave the draft PR for a person to merge." >&2
     exit 2
   fi
 
   # 3. Block --no-verify flag (outside stripped commit messages) and `git commit -n`
   if printf '%s\n' "$subcmd_trimmed" | grep -Eq '(^|[[:space:]])--no-verify([[:space:]]|$)'; then
-    echo "BLOCKED by Kitchen Brigade Hook (principle-taste-before-serving): Bypassing verification hooks with --no-verify is forbidden. FIX: Run the full verification check and fix the underlying failure." >&2
+    echo "BLOCKED by safety hook: Bypassing verification hooks with --no-verify is forbidden. FIX: Run the full verification check and fix the underlying failure." >&2
     exit 2
   fi
   if printf '%s\n' "$subcmd_trimmed" | grep -Eq '(^|[[:space:]])git([[:space:]]+[^[:space:]]+)*[[:space:]]+commit([[:space:]]|$)'; then
     # Strip quoted strings completely before checking for short `-n` flag on `git commit`
     commit_no_quotes="$(printf '%s' "$subcmd_trimmed" | sed -E 's/"([^"\\]|\\.)*"//g; s/'\''[^'\'']*'\''//g')"
     if printf '%s\n' "$commit_no_quotes" | grep -Eq '(^|[[:space:]])-[a-zA-Z]*n[a-zA-Z]*([[:space:]]|$)'; then
-      echo "BLOCKED by Kitchen Brigade Hook (principle-taste-before-serving): Bypassing commit hooks with 'git commit -n' is forbidden. FIX: Run 'git commit' without '-n' and fix any pre-commit failure." >&2
+      echo "BLOCKED by safety hook: Bypassing commit hooks with 'git commit -n' is forbidden. FIX: Run 'git commit' without '-n' and fix any pre-commit failure." >&2
       exit 2
     fi
   fi

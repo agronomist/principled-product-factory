@@ -1,5 +1,5 @@
 {
-  "description": "Kitchen Brigade PreToolUse guard blocking direct pushes to protected branches, PR merges, and verification bypasses",
+  "description": "PreToolUse guard blocking direct pushes to protected branches, PR merges, and verification bypasses",
   "hooks": {
     "PreToolUse": [
       {
