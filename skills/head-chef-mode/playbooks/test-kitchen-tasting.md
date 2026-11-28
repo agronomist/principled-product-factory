@@ -4,15 +4,16 @@ Use this playbook when evaluating a new product concept, menu addition, or AI ca
 
 ## Todo List Steps (Copy into Todo Tool First)
 
-1. **Step 0 Menu Stage & Bayesian Kill-Switch Declaration**:
+1. **Step 0 Menu Stage, Opportunity Reframe & 3 Competing Options (`opportunity-brief`)**:
    - Classify the dish into `Stage A (Test Kitchen 0-to-1)`, `Stage B (Signature Menu & Growth)`, or `Stage C (Multi-Kitchen Franchise Scale)`.
+   - Open [`../../opportunity-brief/SKILL.md`](../../opportunity-brief/SKILL.md): strip off the requester's prescribed solution, answer **Marty Cagan's 4 Opportunity Questions** (Business Objective, Leading-Indicator Key Result, Diner Problem, Target Table Persona), and sketch **3 competing dish options** (1. Garnish/Knife Twist, 2. Bistro 80/20 Special, 3. Full Tasting-Menu Course).
    - Declare the prior probability of success $P(H)$, minimum viable posterior kill-switch threshold $P_{\text{kill}}$, and tasting sample size.
-2. **Run the No-Empty-Calories Gate (`no-empty-calories`)**:
-   - Open [`../../no-empty-calories/SKILL.md`](../../no-empty-calories/SKILL.md).
-   - Compute Tony Ulwick's JTBD Opportunity Score:
-     $$\text{OpportunityScore} = \text{Importance} + \max(\text{Importance} - \text{Satisfaction}, 0)$$
-   - Grade guest evidence on **The Mom Test Commitment Ladder** (`speculative_idea`, `polite_compliment`, `time_commitment`, `reputation_commitment`, `financial_or_pain_commitment`).
-   - **Hard 86**: If the commitment tier is `speculative_idea` (*"diners at some point will order it"*) or `polite_compliment`, or if $\text{OpportunityScore} < 10.0$, **86 the dish** and explain why using the *Kramer's Coffee Table Book / Urban Sombrero* metaphor.
+2. **Run Cagan's Four Big Risks & No-Empty-Calories Gate (`four-tasting-risks` + `no-empty-calories`)**:
+   - Open [`../../four-tasting-risks/SKILL.md`](../../four-tasting-risks/SKILL.md) and [`../../no-empty-calories/SKILL.md`](../../no-empty-calories/SKILL.md).
+   - **Risk 1 — Value Risk**: Compute Tony Ulwick's JTBD Opportunity Score ($\text{Importance} + \max(\text{Importance} - \text{Satisfaction}, 0) \ge 10.0$) and grade guest evidence on **The Mom Test Commitment Ladder**. If speculative (*"diners at some point will order it"*), **86 the dish** (*Kramer's Coffee Table Book / Urban Sombrero*).
+   - **Risk 2 — Usability Risk ([`../../plating-and-experience/SKILL.md`](../../plating-and-experience/SKILL.md))**: Verify Time-to-First-Bite $\le 3$ steps, Empty-Plate first-run guidance, and Burned-Plate fix-naming errors.
+   - **Risk 3 — Feasibility Risk**: Have [`sous-chef-planner`](../../../agents/sous-chef-planner.md) run a Day-0 feasibility check against the live codebase to see if tweaking 10% of the recipe makes it $5\times$ cheaper to cook.
+   - **Risk 4 — Business Viability Risk**: Verify compliance/allergy constraints ([`../../allergy-alert/SKILL.md`](../../allergy-alert/SKILL.md)), GTM channel fit, and menu cannibalization. Enforce **High-Integrity Reservations** (zero hard delivery date promises until all 4 risks are retired).
 3. **Verify Signature Dish Positioning & Moat (`signature-dish-moat`)**:
    - Open [`../../signature-dish-moat/SKILL.md`](../../signature-dish-moat/SKILL.md).
    - Walk through April Dunford's 5-step positioning canvas and verify at least one of Hamilton Helmer's **7 Powers** while defending against ingredient supplier power (Porter's Five Forces).
@@ -21,7 +22,6 @@ Use this playbook when evaluating a new product concept, menu addition, or AI ca
    - Score Workflow Elimination, Flywheel Velocity (passive `user_correction_diff` capture), Deterministic Verifiability, and Unit Margin Resilience.
    - If $\text{EVOI} \le 0$ or a deterministic recipe suffices, block as **Molecular-Gastronomy Foam Theater** (*doing step-overs in your own penalty box*).
    - Verify pre-flight food cost: `unit_revenue - (inference_cost + data_api_cost + hitl_prob * human_review_cost + infra_cost) >= min_margin`.
-5. **Serve the Amuse-Bouche First & Stamp a FIFO Date Dot (`amuse-bouche` + `fifo-walk-in` + `principle-one-course-at-a-time`)**:
+5. **Serve the Amuse-Bouche First, Wire Outcome Telemetry & Stamp a FIFO Date Dot (`amuse-bouche` + `plating-and-experience` + `fifo-walk-in`)**:
    - For `Stage A (Test Kitchen 0-to-1)` features, serve a working 5-minute single-bite interactive/CLI slice on fixture data via [`../../amuse-bouche/SKILL.md`](../../amuse-bouche/SKILL.md) before building database migrations or retry plumbing.
-   - Order prep steps by **Riskiest-Ingredient-First** ($\frac{\text{EVOI} \times (1 + P_{\text{fail}})}{\text{Cost}}$).
-   - Stamp a green painter's tape **`FIFO-DATE-DOT`** expiration tag ([`../../fifo-walk-in/SKILL.md`](../../fifo-walk-in/SKILL.md)) recording the 30-day **86-the-Dish Sunset Threshold** ($< 40\%$ target orders and $< 25\%$ outcome lift $\implies$ remove from menu and delete code).
+   - Require an **Outcome Telemetry Hook (`Plated != Eaten`)** so adoption is measured from Day 1, order prep steps by **Riskiest-Ingredient-First** ($\frac{\text{EVOI} \times (1 + P_{\text{fail}})}{\text{Cost}}$), and stamp a **`FIFO-DATE-DOT`** tag ([`../../fifo-walk-in/SKILL.md`](../../fifo-walk-in/SKILL.md)) enforcing the 30-day **86-the-Dish Sunset Threshold**.

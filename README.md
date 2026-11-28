@@ -2,13 +2,13 @@
 
 Grab an apron. Wash your hands. Leave your "let's slap an AI chatbot on the sidebar and see what happens" ideas by the dumpster out back.
 
-**`principled-product-factory`** is a **39-skill modular cookbook** and **5-station subagent brigade** (`Brigade de Cuisine`) for **Claude Code**, **Cursor**, and **Antigravity**.
+**`principled-product-factory`** is a **42-skill modular cookbook** and **5-station subagent brigade** (`Brigade de Cuisine`) for **Claude Code**, **Cursor**, and **Antigravity**.
 
 We built this because AI coding agents have made writing code 10x faster—which mostly means teams can now cook **inedible dishes nobody ordered at 10x the speed**, burn through GPU token budgets like Kramer and Newman driving a mail truck full of 10-cent soda cans to Michigan, and call it "velocity."
 
 Instead of one giant 3,000-line prompt that your agent forgets by turn four, this repo organizes your workflow like a real, slightly obsessive, Michelin-starred kitchen:
 
-1. **No Empty Calories (`/no-empty-calories`)**: If a feature request is backed only by *"I think users at some point will really like it!"*, we **86 it at the door** before a single burner is lit.
+1. **No Empty Calories & Marty Cagan's 4 Big Risks (`/opportunity-brief`, `/four-tasting-risks`, `/no-empty-calories`)**: We don't run a mercenary Feature Factory that blindly cooks whatever feature list somebody wrote on a napkin. We unbundle every request into the underlying **Diner Problem + Outcome Metric**, test **Value, Usability, Feasibility, and Business Viability Risks** upfront, and if a dish is backed only by *"I think users at some point will really like it!"*, we **86 it at the door**.
 2. **Food-Cost Math Before Firing (`/food-cost-guard`)**: Every dish has to pay for its own ingredients (tokens, third-party APIs, infrastructure, and human review time). If a dish loses money on every plate served, it doesn't go on the menu.
 3. **A Four-Station Kitchen Brigade (`/kitchen-brigade` + `agents/*.md`)**: The Expediter calls the tickets at the pass and never touches a frying pan. Every ticket moves through four isolated stations—**`host-triage` $\to$ (`forager-researcher`) $\to$ `sous-chef-planner` $\to$ `line-cook-implementer` $\to$ `pass-inspector`**—ending in a plated **Draft Pull Request** sitting under the heat lamp for you (the Head Chef) to ring the bell and merge.
 4. **Blind Taste Tests & Clean Cutting Boards (`/cook-off`, `/health-inspector`, `/taste-the-dish`)**: Line cooks don't grade their own sauces. Our Pass Inspector runs on a different model vendor, never hears the Line Cook's excuses, and literally has its `Edit` and `Write` tools taken away so it can't secretly re-salt the soup.
@@ -57,11 +57,11 @@ Here is what happens when a ticket walks into our kitchen (spoiler: most bad ide
 flowchart TD
     Intake["Inbound Ticket / 'Hey what if we built...' / Sales Deal"] --> Host["Station 1: host-triage (The Host Stand)"]
     Host -- "Vague Mystery Ticket" --> Ask["Ask Clarifying Questions & Turn Off the Stove"]
-    Host -- "New Feature Idea" --> ValueGate["/no-empty-calories (Ulwick >= 10 + Mom Test)"]
+    Host -- "New Feature Idea" --> ValueGate["/opportunity-brief + /four-tasting-risks + /no-empty-calories"]
     ValueGate -- "'Someone someday will love this!'" --> EightySix["86 the Dish! (Kramer's Coffee Table Book)"]
     ValueGate -- "Real Hungry Diners w/ Skin in the Game" --> CostGate["/food-cost-guard (Margin >= Floor & EVOI > Cost)"]
     Host -- "Real Bug / Perf Fix" --> CostGate
-    CostGate -- "Passes Food-Cost Math" --> Sous["Station 2: sous-chef-planner + /mise-en-place"]
+    CostGate -- "Passes Food-Cost Math" --> Sous["Station 2: sous-chef-planner + /mise-en-place + /plating-and-experience"]
     Sous -- "Scary One-Way Door?" --> CookOff["/cook-off (3 Cooks, 3 Worktrees, Blind Taster, Graft)"]
     Sous -- "Clear Recipe" --> LineCook["Station 3: line-cook-implementer (git worktree factory/*)"]
     CookOff --> LineCook
@@ -77,7 +77,7 @@ flowchart TD
 
 ## 3. Copy-Paste Orders for Your Next Shift
 
-Don't memorize 33 skill names. Just type **`/head-chef-mode`** and tell the kitchen what you want cooked. Here are seven fan favorites you can paste right into Claude Code:
+Don't memorize 42 skill names. Just type **`/head-chef-mode`** and tell the kitchen what you want cooked. Here are seven fan favorites you can paste right into Claude Code:
 
 ### 1. Turn an Issue into a Blind-Inspected Draft PR
 > *"Look, a bug walked in. Run it through the 4 stations on a clean cutting board, taste it, and leave a Draft PR under the heat lamp."*
@@ -88,7 +88,7 @@ Don't memorize 33 skill names. Just type **`/head-chef-mode`** and tell the kitc
 ### 2. The "Is This an Urban Sombrero?" Feature Triage
 > *"Someone wants to spend 3 weeks building a 3D animated dashboard. Let's check if customers actually care or if we're falling into the Build Trap."*
 ```text
-/head-chef-mode Run the test-kitchen-tasting playbook on this proposal: "<describe feature>". Score it with /no-empty-calories (Ulwick JTBD Opportunity Score + Mom Test commitment tier) and /food-cost-guard (4-axis AI filter + unit contribution margin). Tell me plainly if we should cook it, run a Stage A pop-up, or 86 it.
+/head-chef-mode Run the test-kitchen-tasting playbook on this proposal: "<describe feature>". Unbundle it with /opportunity-brief, score Marty Cagan's 4 Big Risks with /four-tasting-risks and /no-empty-calories, and check /food-cost-guard. Tell me plainly if we should cook it, serve a 5-minute /amuse-bouche, or 86 it.
 ```
 
 ### 3. The 3-Chef Cook-Off (`/cook-off`)
@@ -123,7 +123,7 @@ Don't memorize 33 skill names. Just type **`/head-chef-mode`** and tell the kitc
 
 ---
 
-## 4. Meet the Brigade (All 5 Subagents & 39 Skills)
+## 4. Meet the Brigade (All 5 Subagents & 42 Skills)
 
 ### The 5 Native Claude Code Station Subagents (`agents/` $\to$ `.claude/agents/`)
 Each station runs in a fresh, stateless shift and only gets the exact kitchen tools it needs:
@@ -132,9 +132,9 @@ Each station runs in a fresh, stateless shift and only gets the exact kitchen to
 | :--- | :--- |
 | **[`host-triage`](agents/host-triage.md)** | **The Host at the Door (Classifier)**: Read-only (`Read, Grep, Glob`). Checks the reservation, tags the ticket, flags `purple_board_allergy` & `amuse_bouche_candidate`, or stops the line with `needs_clarification`. |
 | **[`forager-researcher`](agents/forager-researcher.md)** | **The Forager (Researcher)**: Read + Web (`Read, Grep, Glob, WebSearch, WebFetch`). Heads out to the farmers' market when you need an upstream bug report or library changelog, and saves a pass-by-ID prep note. |
-| **[`sous-chef-planner`](agents/sous-chef-planner.md)** | **The Sous Chef (Analyst)**: Read-only (`Read, Grep, Glob`). Plans against a live checkout, sets up `/mise-en-place` containers, and writes the **verbatim plating criteria**. |
+| **[`sous-chef-planner`](agents/sous-chef-planner.md)** | **The Sous Chef (Product Trio Tech Lead)**: Read-only (`Read, Grep, Glob`). Runs the Day-0 Feasibility Spike (`/four-tasting-risks`), unbundles problems (`/opportunity-brief`), sets up `/mise-en-place`, and writes **verbatim plating criteria** (including `/plating-and-experience` & `Plated != Eaten` telemetry). |
 | **[`line-cook-implementer`](agents/line-cook-implementer.md)** | **The Line Cook (Implementer)**: Full station tools (`Read, Edit, Write, Grep, Glob, Bash`). Cooks on an isolated `factory/<ticket-id>` branch, tastes the dish, wipes the board, and plates the commit. |
-| **[`pass-inspector`](agents/pass-inspector.md)** | **The Blind Pass Inspector (Reviewer)**: Read + test runner (`Read, Grep, Glob, Bash` — **`Edit` and `Write` are confiscated at the door**). Runs `clean-station.sh` & `audit-date-dots.sh`, enforces `/allergy-alert` negative tests, and grades verbatim criteria blind. |
+| **[`pass-inspector`](agents/pass-inspector.md)** | **The Blind Pass Inspector (Reviewer)**: Read + test runner (`Read, Grep, Glob, Bash` — **`Edit` and `Write` are confiscated at the door**). Runs `clean-station.sh` & `audit-date-dots.sh`, enforces `/allergy-alert` negative tests and `Plated != Eaten` telemetry, and grades verbatim criteria blind. |
 
 ---
 
@@ -154,9 +154,12 @@ Each station runs in a fresh, stateless shift and only gets the exact kitchen to
 | **[`/stage-tryout`](skills/stage-tryout/SKILL.md)** | The one-shift ***Stage* (trail audition)**: test a new LLM model, library, or skill rewrite by replaying one solved historical ticket in an isolated worktree and scoring it head-to-head against your incumbent baseline before hiring it onto the main line. |
 | **[`/amuse-bouche`](skills/amuse-bouche/SKILL.md)** | **Serve the spoon before boiling the 40-gallon stockpot**: for Stage A 0-to-1 features, plate a working 5-minute single-bite interactive/CLI slice with fixture data so you can taste the workflow before spending 20,000 tokens on database migrations. |
 
-### Menu Value, Food Cost, Brigade Line & Sommelier (8 Skills)
+### Marty Cagan Product Trio, Menu Value, Food Cost, Brigade Line & Sommelier (11 Skills)
 | Skill | What It Does on the Line |
 | :--- | :--- |
+| **[`/opportunity-brief`](skills/opportunity-brief/SKILL.md)** | **Missionaries, not Mercenaries**: strips off prescribed feature requests (*"Build button X"*), answers Marty Cagan's 4 Opportunity Questions (Objective, Leading-Indicator Metric, Diner Problem, Target Table Persona), and pitches **3 competing dish concepts** starting with a 15-line Garnish/Knife Twist. |
+| **[`/four-tasting-risks`](skills/four-tasting-risks/SKILL.md)** | **Cagan's 4 Big Risks Scorecard & High-Integrity Reservations**: de-risks **Value, Usability, Feasibility (Day-0 Sous Chef spike), and Business Viability** before firing line cooks, and forbids promising hard delivery dates until Discovery retires all 4 risks. |
+| **[`/plating-and-experience`](skills/plating-and-experience/SKILL.md)** | **The Product Trio's Design & UX Seat**: enforces Time-to-First-Bite ($\le 3$ steps), Empty-Plate first-run guidance, Burned-Plate fix-naming errors (`ERROR: ... FIX: ...`), zero kitchen plumbing on the guest table, and **`Plated != Eaten` mandatory outcome telemetry hooks**. |
 | **[`/no-empty-calories`](skills/no-empty-calories/SKILL.md)** | Our Anti-Build-Trap bouncer. Requires Ulwick JTBD Opportunity Score $\ge 10.0$, *The Mom Test* skin-in-the-game, and 86's untouched zombie features after 30 days. |
 | **[`/food-cost-guard`](skills/food-cost-guard/SKILL.md)** | Enforces `unit_revenue - (inference_cost + data_api_cost + hitl_prob * human_review_cost + infra_cost) >= min_margin`, blocks molecular-gastronomy AI foam where SQL suffices, and runs 6-month menu re-pricing audits. |
 | **[`/kitchen-brigade`](skills/kitchen-brigade/SKILL.md)** | Runs the 4 stations in order, passes long memos by validated ticket ID (`^[a-z0-9]+(?:-[a-z0-9]+)*$`), guards the Master Recipe Book against prompt poisoning, and stops at a Draft PR. |
