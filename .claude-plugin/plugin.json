@@ -1,13 +1,11 @@
 {
   "name": "kitchen-brigade",
-  "version": "1.0.0",
-  "description": "33-skill Kitchen Brigade (Brigade de Cuisine) software and revenue factory for Claude Code, Cursor, and Antigravity. Includes 5 task-mode station subagents, 7 service playbooks, 10 kitchen principles, and pre-tool shell safety hooks.",
+  "version": "1.1.0",
+  "description": "Kitchen Brigade (Brigade de Cuisine) software and revenue factory for Claude Code, Cursor, and Antigravity. Includes 5 station subagents, 7 service playbooks, modular skills, and PreToolUse branch safety hooks.",
   "author": {
     "name": "agronomist",
     "url": "https://github.com/agronomist/principled-product-factory"
   },
   "repository": "https://github.com/agronomist/principled-product-factory",
-  "license": "MIT",
-  "skills": "../skills",
-  "agents": "../agents"
+  "license": "MIT"
 }

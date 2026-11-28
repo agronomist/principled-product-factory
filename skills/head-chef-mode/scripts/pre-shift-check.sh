@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # The 4:30 PM Pre-Shift Lineup & Walk-In Inventory Check (/pre-shift-lineup)
-# Inspects base stockpot health, active factory/* cutting boards against Little's Law,
-# walk-in FIFO date dots, and station cleanliness before dinner service opens.
+# Works from inside the cookbook repo OR from any external project where the plugin is installed.
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-cd "$REPO_ROOT"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WORK_REPO="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$WORK_REPO"
 
 WIP_LIMIT="${KITCHEN_WIP_LIMIT:-5}"
 CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "detached")"
@@ -15,7 +15,7 @@ ACTIVE_WORKTREES="$(git worktree list --porcelain 2>/dev/null | grep -c '^branch
 FACTORY_BRANCHES="$(git branch --list 'factory/*' 2>/dev/null | wc -l | tr -d ' ')"
 
 echo "================================================================"
-echo " 4:30 PM PRE-SHIFT LINEUP & WALK-IN CHECK"
+echo " 4:30 PM PRE-SHIFT LINEUP & WALK-IN CHECK ($WORK_REPO)"
 echo "================================================================"
 echo "-> [1/4] Base Stockpot Status:"
 echo "   Current Branch : $CURRENT_BRANCH"
@@ -33,10 +33,10 @@ if (( ACTIVE_WORKTREES >= WIP_LIMIT )); then
 fi
 
 echo "-> [3/4] Walk-In Cooler FIFO Date-Dot Scan:"
-bash skills/head-chef-mode/scripts/audit-date-dots.sh "$REPO_ROOT"
+bash "$SCRIPT_DIR/audit-date-dots.sh" "$WORK_REPO"
 
 echo "-> [4/4] Station Surface Check ('Clean As You Go'):"
-bash skills/head-chef-mode/scripts/clean-station.sh --dir "$REPO_ROOT"
+bash "$SCRIPT_DIR/clean-station.sh" --dir "$WORK_REPO"
 
 echo "================================================================"
 echo " LINEUP COMPLETE — The kitchen is prepped and ready for service!"

@@ -97,4 +97,22 @@ if [ -d "$AGENTS_DIR" ]; then
   done
 fi
 
-echo "OK: Validated $SKILL_COUNT modular kitchen skills and $AGENT_COUNT Claude Code station subagents (100% frontmatter, symlink rack & tool-boundary integrity)."
+# Validate Claude Code plugin manifest (.claude-plugin/plugin.json) and hooks/hooks.json if present
+if [ -f "$REPO_ROOT/.claude-plugin/plugin.json" ]; then
+  if command -v jq >/dev/null 2>&1; then
+    jq empty "$REPO_ROOT/.claude-plugin/plugin.json"
+  fi
+  if grep -q '\.\./' "$REPO_ROOT/.claude-plugin/plugin.json"; then
+    echo "ERROR: .claude-plugin/plugin.json contains '../' parent-traversal paths (rejected by 'claude plugin validate'). FIX: Omit skills/agents keys to use default top-level folders or use './' relative paths." >&2
+    exit 1
+  fi
+  if [ ! -f "$REPO_ROOT/hooks/hooks.json" ]; then
+    echo "ERROR: hooks/hooks.json is missing for Claude Code plugin distribution. FIX: Create hooks/hooks.json registering \${CLAUDE_PLUGIN_ROOT}/hooks/pre-tool-guard.sh." >&2
+    exit 1
+  fi
+  if command -v jq >/dev/null 2>&1; then
+    jq empty "$REPO_ROOT/hooks/hooks.json"
+  fi
+fi
+
+echo "OK: Validated $SKILL_COUNT modular kitchen skills, $AGENT_COUNT Claude Code station subagents, and plugin/hook manifests (100% integrity)."

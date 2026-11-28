@@ -200,35 +200,39 @@ Each station runs in a fresh, stateless shift and only gets the exact kitchen to
 
 ---
 
-## 5. Built-In Bouncer & Executable Kitchen Levers
+## 5. Built-In Bouncer & Portable Kitchen Levers
 
-Instead of trusting an LLM to pinky-promise it read the rules, we ship executable shell levers in [`skills/head-chef-mode/scripts/`](skills/head-chef-mode/scripts/) and a Claude Code `PreToolUse` hook in [`.claude/settings.json`](.claude/settings.json) backed by [`hooks/pre-tool-guard.sh`](hooks/pre-tool-guard.sh):
+Instead of trusting an LLM to pinky-promise it read the rules, we ship executable shell levers in [`skills/head-chef-mode/scripts/`](skills/head-chef-mode/scripts/) and a Claude Code plugin hook in [`hooks/hooks.json`](hooks/hooks.json) + [`hooks/pre-tool-guard.sh`](hooks/pre-tool-guard.sh) (also installed automatically by `./install.sh` into `.claude/hooks/`). Pair this local bouncer with **GitHub Branch Protection** on `main` as your server-side lock:
 
 ```bash
+# Works in this repo OR in any project where you ran `./install.sh /path/to/project`:
+
 # 1. 4:30 PM Pre-Shift Lineup & Walk-In Cooler Check (/pre-shift-lineup)
-bash skills/head-chef-mode/scripts/pre-shift-check.sh
+bash .claude/skills/head-chef-mode/scripts/pre-shift-check.sh
 
 # 2. Run the 5-step Live Tasting Harness (Fire Up -> Station Check -> Plate -> Proof -> Dishpit)
-#    Drives every feature in features/README.md and writes .audit/evidence/proof-kitchen-cookbook.json
-bash skills/head-chef-mode/scripts/run-live-tasting.sh
+#    Drives every feature in features/README.md (including clean external install & 8 bouncer bypass tests)
+bash .claude/skills/head-chef-mode/scripts/run-live-tasting.sh
 
-# 3. Spawn an isolated git worktree cutting board (enforces Little's Law WIP <= 5)
-bash skills/head-chef-mode/scripts/spawn-worktree.sh TKT-104-auth-boundary
+# 3. Spawn, list, or bus an isolated git worktree cutting board (enforces Little's Law WIP <= 5)
+bash .claude/skills/head-chef-mode/scripts/spawn-worktree.sh TKT-104-auth-boundary
+bash .claude/skills/head-chef-mode/scripts/spawn-worktree.sh --list
+bash .claude/skills/head-chef-mode/scripts/spawn-worktree.sh --bus TKT-104-auth-boundary
 
 # 4. "Clean As You Go" Station Sanitizer + Purple-Board Allergy Scan (/allergy-alert)
-bash skills/head-chef-mode/scripts/clean-station.sh --allergy
+bash .claude/skills/head-chef-mode/scripts/clean-station.sh --allergy
 
 # 5. Green Painter's Tape FIFO Date-Dot Spoilage Audit (/fifo-walk-in)
-bash skills/head-chef-mode/scripts/audit-date-dots.sh
+bash .claude/skills/head-chef-mode/scripts/audit-date-dots.sh
 
-# 6. Strip the Line Cook's excuses & package a blind tasting bundle for pass-inspector
-bash skills/head-chef-mode/scripts/cross-vendor-taste.sh HEAD~1 "All tests pass; zero regressions"
+# 6. Strip the Line Cook's excuses, record working-tree SHA-256, & package a blind tasting bundle
+bash .claude/skills/head-chef-mode/scripts/cross-vendor-taste.sh HEAD~1 "All tests pass; zero regressions"
 
 # 7. Log an atomic decision row to decisions.tsv (escapes spreadsheet formula injection)
-bash skills/head-chef-mode/scripts/log-decision.sh "line-cook" "added retry jitter" "prevent thundering herd" "tests/retry.sh:PASS" "kept commit"
+bash .claude/skills/head-chef-mode/scripts/log-decision.sh "line-cook" "added retry jitter" "prevent thundering herd" "tests/retry.sh:PASS" "kept commit"
 
-# 8. End-of-Shift Closing Duty (validates all 39 skills, 5 agents, feature map, and tasting proof)
-bash skills/head-chef-mode/scripts/closing-duty.sh
+# 8. End-of-Shift Closing Duty (validates all 42 skills, 5 agents, plugin manifests, feature map, and tasting proof)
+bash .claude/skills/head-chef-mode/scripts/closing-duty.sh
 ```
 
 Now fire up `/head-chef-mode` and let's cook something people actually want to eat.

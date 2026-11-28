@@ -1,0 +1,16 @@
+{
+  "description": "Kitchen Brigade PreToolUse guard blocking direct pushes to protected branches, PR merges, and verification bypasses",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-tool-guard.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}
