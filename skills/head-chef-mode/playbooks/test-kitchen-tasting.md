@@ -21,5 +21,7 @@ Use this playbook when evaluating a new product concept, menu addition, or AI ca
    - Score Workflow Elimination, Flywheel Velocity (passive `user_correction_diff` capture), Deterministic Verifiability, and Unit Margin Resilience.
    - If $\text{EVOI} \le 0$ or a deterministic recipe suffices, block as **Molecular-Gastronomy Foam Theater** (*doing step-overs in your own penalty box*).
    - Verify pre-flight food cost: `unit_revenue - (inference_cost + data_api_cost + hitl_prob * human_review_cost + infra_cost) >= min_margin`.
-5. **Fire the Cheapest Pop-Up Tasting First (`principle-one-course-at-a-time`)**:
-   - Order prep steps by **Riskiest-Ingredient-First** ($\frac{\text{EVOI} \times (1 + P_{\text{fail}})}{\text{Cost}}$) and record the 30-day **86-the-Dish Sunset Threshold** ($< 40\%$ target orders and $< 25\%$ outcome lift $\implies$ remove from menu and delete code).
+5. **Serve the Amuse-Bouche First & Stamp a FIFO Date Dot (`amuse-bouche` + `fifo-walk-in` + `principle-one-course-at-a-time`)**:
+   - For `Stage A (Test Kitchen 0-to-1)` features, serve a working 5-minute single-bite interactive/CLI slice on fixture data via [`../../amuse-bouche/SKILL.md`](../../amuse-bouche/SKILL.md) before building database migrations or retry plumbing.
+   - Order prep steps by **Riskiest-Ingredient-First** ($\frac{\text{EVOI} \times (1 + P_{\text{fail}})}{\text{Cost}}$).
+   - Stamp a green painter's tape **`FIFO-DATE-DOT`** expiration tag ([`../../fifo-walk-in/SKILL.md`](../../fifo-walk-in/SKILL.md)) recording the 30-day **86-the-Dish Sunset Threshold** ($< 40\%$ target orders and $< 25\%$ outcome lift $\implies$ remove from menu and delete code).

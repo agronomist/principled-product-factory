@@ -51,13 +51,13 @@ Match the incoming order to a playbook, open `playbooks/<name>.md`, and copy its
 
 | Order / Trigger Phrase | Playbook | Primary Skills Loaded |
 | :--- | :--- | :--- |
-| Inbound GitHub issue, Linear ticket, or `"plate a draft PR for <ticket>"` | [`playbooks/ticket-to-pass.md`](playbooks/ticket-to-pass.md) | `kitchen-brigade`, `no-empty-calories`, `food-cost-guard`, `health-inspector` |
-| New product idea, feature request, or `"should we put <X> on the menu?"` | [`playbooks/test-kitchen-tasting.md`](playbooks/test-kitchen-tasting.md) | `no-empty-calories`, `food-cost-guard`, `signature-dish-moat`, `cook-off` |
-| Optimize a metric, fix a slow query, or `"reduce this sauce / hillclimb <metric>"` | [`playbooks/recipe-reduction-loop.md`](playbooks/recipe-reduction-loop.md) | `prep-log`, `thermometer-check`, `principle-check-the-oven`, `principle-one-course-at-a-time` |
+| Inbound GitHub issue, Linear ticket, or `"plate a draft PR for <ticket>"` | [`playbooks/ticket-to-pass.md`](playbooks/ticket-to-pass.md) | `pre-shift-lineup`, `kitchen-brigade`, `allergy-alert`, `fifo-walk-in`, `no-empty-calories`, `food-cost-guard`, `health-inspector` |
+| New product idea, feature request, or `"should we put <X> on the menu?"` | [`playbooks/test-kitchen-tasting.md`](playbooks/test-kitchen-tasting.md) | `no-empty-calories`, `food-cost-guard`, `signature-dish-moat`, `amuse-bouche`, `fifo-walk-in`, `cook-off` |
+| Optimize a metric, fix a slow query, or `"reduce this sauce / hillclimb <metric>"` | [`playbooks/recipe-reduction-loop.md`](playbooks/recipe-reduction-loop.md) | `prep-log`, `thermometer-check`, `stage-tryout`, `principle-check-the-oven`, `principle-one-course-at-a-time` |
 | Enterprise B2B pitch, guest demanding off-menu custom dish / discount | [`playbooks/sommelier-table-pitch.md`](playbooks/sommelier-table-pitch.md) | `sommelier-table-pitch`, `no-empty-calories`, `food-cost-guard` |
-| Post-merge rollout, spoiled batch incident, or `"check kitchen throughput"` | [`playbooks/first-tables-and-service-speed.md`](playbooks/first-tables-and-service-speed.md) | `pantry-backup-and-incident-card`, `central-commissary` |
+| Post-merge rollout, spoiled batch incident, or `"check kitchen throughput"` | [`playbooks/first-tables-and-service-speed.md`](playbooks/first-tables-and-service-speed.md) | `pantry-backup-and-incident-card`, `central-commissary`, `fifo-walk-in` |
 | Mine guest feedback, stamp a new kitchen line, or `"harvest the dining room"` | [`playbooks/dining-room-harvest.md`](playbooks/dining-room-harvest.md) | `dining-room-feedback`, `central-commissary`, `sharpen-the-knives`, `update-the-cookbook` |
-| Large cross-cutting migration or novel multi-course project | [`playbooks/off-menu-special.md`](playbooks/off-menu-special.md) | `mise-en-place`, `cook-off`, `prep-log`, `taste-the-dish`, `cross-contamination` |
+| Large cross-cutting migration or novel multi-course project | [`playbooks/off-menu-special.md`](playbooks/off-menu-special.md) | `pre-shift-lineup`, `mise-en-place`, `cook-off`, `stage-tryout`, `prep-log`, `taste-the-dish`, `cross-contamination` |
 
 ---
 

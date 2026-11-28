@@ -8,8 +8,24 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET_BASE="${1:-$HOME}"
+TARGET_ABS="$(cd "$TARGET_BASE" 2>/dev/null && pwd || echo "$TARGET_BASE")"
 
-if [ "$TARGET_BASE" = "$HOME" ]; then
+SKILL_COUNT="$(find "$REPO_ROOT/skills" -mindepth 2 -maxdepth 2 -name 'SKILL.md' | wc -l | tr -d ' ')"
+AGENT_COUNT="$(find "$REPO_ROOT/agents" -maxdepth 1 -name '*.md' | wc -l | tr -d ' ')"
+
+# Self-repo idempotency guard: if the caller runs `./install.sh .` inside this repo,
+# keep the clean relative directory symlinks (.claude/skills -> ../skills) instead of creating circular links.
+if [ "$TARGET_ABS" = "$REPO_ROOT" ]; then
+  mkdir -p "$REPO_ROOT/.claude" "$REPO_ROOT/.cursor" "$REPO_ROOT/.agents"
+  ln -sfn ../skills "$REPO_ROOT/.claude/skills"
+  ln -sfn ../agents "$REPO_ROOT/.claude/agents"
+  ln -sfn ../skills "$REPO_ROOT/.cursor/skills"
+  ln -sfn ../skills "$REPO_ROOT/.agents/skills"
+  echo "Verified in-repo station symlinks for $SKILL_COUNT Kitchen Brigade skills and $AGENT_COUNT station subagents."
+  exit 0
+fi
+
+if [ "$TARGET_ABS" = "$HOME" ]; then
   CLAUDE_DIR="$HOME/.claude"
   CURSOR_DIR="$HOME/.cursor"
   AGENTS_DIR="$HOME/.agents"
@@ -35,7 +51,7 @@ for agent_md in "$REPO_ROOT"/agents/*.md; do
   ln -sfn "$agent_md" "$CLAUDE_DIR/agents/$agent_name"
 done
 
-echo "Installed 33 Kitchen Brigade skills and 5 station subagents into $SCOPE_LABEL:"
+echo "Installed $SKILL_COUNT Kitchen Brigade skills and $AGENT_COUNT station subagents into $SCOPE_LABEL:"
 echo "  - Claude Code skills : $CLAUDE_DIR/skills/"
 echo "  - Claude Code agents : $CLAUDE_DIR/agents/"
 echo "  - Cursor skills      : $CURSOR_DIR/skills/"

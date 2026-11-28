@@ -62,7 +62,28 @@ if bash "$SCRATCH_DIR/bad-repo/skills/head-chef-mode/scripts/validate-skills.sh"
   echo "FAIL: Negative mutation test failed — validate-skills.sh passed on broken frontmatter!" >&2
   exit 1
 fi
-echo "PASS: Negative mutation check confirmed validate-skills.sh rejects broken frontmatter."
+
+# Negative mutation check 1b: Prove validate-skills.sh rejects a pass-inspector holding Edit/Write tongs
+cat << 'EOF' > "$SCRATCH_DIR/bad-repo/skills/broken-dish/SKILL.md"
+---
+name: broken-dish
+description: Valid temporary skill so execution reaches agent validation.
+---
+Valid skill body.
+EOF
+cat << 'EOF' > "$SCRATCH_DIR/bad-repo/agents/pass-inspector.md"
+---
+name: pass-inspector
+description: Corrupted pass inspector that illegally holds Edit and Write tools.
+tools: Read, Grep, Glob, Bash, Edit, Write
+---
+Body.
+EOF
+if bash "$SCRATCH_DIR/bad-repo/skills/head-chef-mode/scripts/validate-skills.sh" > /dev/null 2>&1; then
+  echo "FAIL: Negative mutation test failed — validate-skills.sh allowed pass-inspector to hold Edit/Write!" >&2
+  exit 1
+fi
+echo "PASS: Negative mutation checks confirmed validate-skills.sh rejects broken frontmatter AND blocks write tools on pass-inspector."
 
 # Feature 2: Service-Door Bouncer Hook (allow + 3 block cases)
 echo "-> Feature 2: Service-Door Bouncer Hook (features/service-door-bouncer.md)"

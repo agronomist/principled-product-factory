@@ -48,6 +48,12 @@ for skill_md in "$SKILLS_DIR"/*/SKILL.md; do
     fi
   done < <(printf '%s\n' "$frontmatter" | awk '/^file_names:/ {in_fn=1; next} in_fn && /^  - / {sub(/^  - /, ""); print; next} in_fn && /^[^ ]/ {in_fn=0}')
 
+  # If this repo has a local .claude/skills rack, verify the skill is actually on the rack
+  if [ -d "$REPO_ROOT/.claude/skills" ] && [ ! -e "$REPO_ROOT/.claude/skills/$dir_name/SKILL.md" ]; then
+    echo "ERROR: Skill '$dir_name' is in skills/ but missing from .claude/skills/$dir_name. FIX: Run './install.sh .' to sync station symlinks." >&2
+    exit 1
+  fi
+
 done
 
 AGENTS_DIR="$REPO_ROOT/agents"
@@ -72,7 +78,23 @@ if [ -d "$AGENTS_DIR" ]; then
       echo "ERROR: $agent_md is missing 'tools:' allowlist in frontmatter. FIX: Add a 'tools:' line to $agent_md." >&2
       exit 1
     fi
+
+    # Lock on the knife drawer: read-only / inspection stations must NEVER hold Edit or Write tools
+    tools_line="$(printf '%s\n' "$frontmatter" | awk -F': *' '/^tools:/ {print $2; exit}')"
+    case "$base_name" in
+      host-triage|forager-researcher|sous-chef-planner|pass-inspector)
+        if printf '%s\n' "$tools_line" | grep -Eq '(^|[[:space:],])(Edit|Write)([[:space:],]|$)'; then
+          echo "ERROR: Read-only/inspection station '$base_name' holds write tools ($tools_line)! FIX: Confiscate Edit and Write from $agent_md." >&2
+          exit 1
+        fi
+        ;;
+    esac
+
+    if [ -d "$REPO_ROOT/.claude/agents" ] && [ ! -e "$REPO_ROOT/.claude/agents/$base_name.md" ]; then
+      echo "ERROR: Agent '$base_name' is in agents/ but missing from .claude/agents/$base_name.md. FIX: Run './install.sh .' to sync station symlinks." >&2
+      exit 1
+    fi
   done
 fi
 
-echo "OK: Validated $SKILL_COUNT modular kitchen skills and $AGENT_COUNT Claude Code station subagents (100% frontmatter & resource integrity)."
+echo "OK: Validated $SKILL_COUNT modular kitchen skills and $AGENT_COUNT Claude Code station subagents (100% frontmatter, symlink rack & tool-boundary integrity)."
